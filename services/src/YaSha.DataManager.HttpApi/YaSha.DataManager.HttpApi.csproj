@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <RootNamespace>YaSha.DataManager</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\modules\BasicManagement\src\YaSha.DataManager.BasicManagement.HttpApi\YaSha.DataManager.BasicManagement.HttpApi.csproj" />
+    <ProjectReference Include="..\..\..\modules\DataDictionaryManagement\src\YaSha.DataManager.DataDictionaryManagement.HttpApi\YaSha.DataManager.DataDictionaryManagement.HttpApi.csproj" />
+    <ProjectReference Include="..\..\..\modules\NotificationManagement\src\YaSha.DataManager.NotificationManagement.HttpApi\YaSha.DataManager.NotificationManagement.HttpApi.csproj" />
+    <ProjectReference Include="..\..\..\modules\LanguageManagement\src\YaSha.DataManager.LanguageManagement.HttpApi\YaSha.DataManager.LanguageManagement.HttpApi.csproj" />
+    <ProjectReference Include="..\YaSha.DataManager.Application.Contracts\YaSha.DataManager.Application.Contracts.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="EasyAbp.Abp.Trees.HttpApi" Version="2.11.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="9.0.1" />
+    <PackageReference Include="Swashbuckle.AspNetCore.Annotations" />
+  </ItemGroup>
+
+</Project>

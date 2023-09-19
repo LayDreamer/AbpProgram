@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    
+
+    <PropertyGroup>
+        <TargetFramework>net7.0</TargetFramework>
+        <RootNamespace>YaSha.DataManager.NotificationManagement</RootNamespace>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Volo.Abp.Ddd.Domain" />
+     
+        <ProjectReference Include="..\YaSha.DataManager.NotificationManagement.Domain.Shared\YaSha.DataManager.NotificationManagement.Domain.Shared.csproj" />
+    </ItemGroup>
+
+</Project>

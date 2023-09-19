@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net7.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <RootNamespace />
+        <AssemblyName>YaSha.DataManager.CAP.EntityFrameworkCore</AssemblyName>
+    </PropertyGroup>
+    <ItemGroup>
+        <PackageReference Include="Volo.Abp.EntityFrameworkCore" />
+    </ItemGroup>
+    <ItemGroup>
+      <ProjectReference Include="..\YaSha.DataManager.CAP\YaSha.DataManager.CAP.csproj" />
+    </ItemGroup>
+</Project>

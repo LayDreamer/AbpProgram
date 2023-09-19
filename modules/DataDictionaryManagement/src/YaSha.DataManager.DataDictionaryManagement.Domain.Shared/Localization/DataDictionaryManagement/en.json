@@ -1,0 +1,17 @@
+{
+  "culture": "en",
+  "texts": {
+    "ManageYourProfile":  "Manage your profile",
+    "SamplePageMessage": "A sample page for the DataDictionaryManagement module",
+    "Permission:DataDictionaryManagement": "DataDictionaryManagement",
+    "Permission:Create": "Create",
+    "Permission:Update": "Update",
+    "Permission:Delete": "Delete",
+    
+    "YaSha.DataManager.DataDictionaryManagement:100001": "DataDictionary Exist",
+    "YaSha.DataManager.DataDictionaryManagement:100002": "DataDictionary Not Exist",
+    "YaSha.DataManager.DataDictionaryManagement:100003": "DataDictionaryDetail Exist",
+    "YaSha.DataManager.DataDictionaryManagement:100004": "DataDictionaryDetail Not Exist"
+    
+  }
+}

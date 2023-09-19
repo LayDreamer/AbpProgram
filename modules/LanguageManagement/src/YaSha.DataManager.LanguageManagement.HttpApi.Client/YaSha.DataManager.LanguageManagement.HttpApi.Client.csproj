@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  
+    <PropertyGroup>
+		<TargetFramework>net7.0</TargetFramework>
+        <RootNamespace>YaSha.DataManager.LanguageManagement</RootNamespace>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Volo.Abp.Http.Client" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\YaSha.DataManager.LanguageManagement.Application.Contracts\YaSha.DataManager.LanguageManagement.Application.Contracts.csproj" />
+    </ItemGroup>
+
+</Project>

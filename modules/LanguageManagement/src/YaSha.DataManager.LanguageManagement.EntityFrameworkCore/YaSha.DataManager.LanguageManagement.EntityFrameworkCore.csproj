@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  
+    <PropertyGroup>
+        <TargetFramework>net7.0</TargetFramework>
+        <RootNamespace>YaSha.DataManager.LanguageManagement</RootNamespace>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Volo.Abp.EntityFrameworkCore" />
+        <ProjectReference Include="..\YaSha.DataManager.LanguageManagement.Domain\YaSha.DataManager.LanguageManagement.Domain.csproj" />
+    </ItemGroup>
+
+</Project>

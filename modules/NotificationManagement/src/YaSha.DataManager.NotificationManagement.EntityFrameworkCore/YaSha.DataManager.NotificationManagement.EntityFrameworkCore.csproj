@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+ 
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <RootNamespace>YaSha.DataManager.NotificationManagement</RootNamespace> 
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.EntityFrameworkCore" />
+    <ProjectReference Include="..\YaSha.DataManager.NotificationManagement.Domain\YaSha.DataManager.NotificationManagement.Domain.csproj" />
+  </ItemGroup>
+
+</Project>

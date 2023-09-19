@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <PropertyGroup>
+        <TargetFramework>net7.0</TargetFramework>
+    </PropertyGroup>
+
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\shared\YaSha.DataManager.Shared.Hosting.Gateways\YaSha.DataManager.Shared.Hosting.Gateways.csproj" />
+    </ItemGroup>
+
+</Project>

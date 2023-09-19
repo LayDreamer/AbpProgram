@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+	<Import Project="..\..\..\common.props" />
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<RootNamespace>YaSha.DataManager</RootNamespace>
+		<IsPackable>false</IsPackable>
+	</PropertyGroup>
+	<ItemGroup>
+	  <ProjectReference Include="..\..\src\YaSha.DataManager.FreeSqlReppsitory\YaSha.DataManager.FreeSqlReppsitory.csproj" />
+	  <ProjectReference Include="..\YaSha.DataManager.TestBase\YaSha.DataManager.TestBase.csproj" />
+	</ItemGroup>
+
+</Project>

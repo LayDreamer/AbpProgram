@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+
+    <PropertyGroup>
+        <TargetFramework>net7.0</TargetFramework>
+        <RootNamespace>YaSha.DataManager.FileManagement</RootNamespace>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Volo.Abp.AutoMapper" />
+        <PackageReference Include="Volo.Abp.Ddd.Application" />
+        <PackageReference Include="Volo.Abp.BlobStoring.Aliyun" />
+        <ProjectReference Include="..\YaSha.DataManager.FileManagement.Application.Contracts\YaSha.DataManager.FileManagement.Application.Contracts.csproj" />
+        <ProjectReference Include="..\YaSha.DataManager.FileManagement.Domain\YaSha.DataManager.FileManagement.Domain.csproj" />
+    </ItemGroup>
+
+</Project>

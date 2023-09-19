@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <RootNamespace>YaSha.DataManager.BasicManagement</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\YaSha.DataManager.BasicManagement.Application\YaSha.DataManager.BasicManagement.Application.csproj" />
+    <ProjectReference Include="..\YaSha.DataManager.BasicManagement.Domain.Tests\YaSha.DataManager.BasicManagement.Domain.Tests.csproj" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" />
+  </ItemGroup>
+
+</Project>

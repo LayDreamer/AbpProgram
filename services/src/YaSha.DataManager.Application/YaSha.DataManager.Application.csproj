@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk">
+    
+
+    <PropertyGroup>
+        <TargetFramework>net7.0</TargetFramework>
+        <RootNamespace>YaSha.DataManager</RootNamespace>
+    </PropertyGroup>
+    
+
+    <ItemGroup>
+      <PackageReference Include="EasyAbp.Abp.Trees.Application" Version="2.11.0" />
+      <PackageReference Include="EasyAbp.PrivateMessaging.Application" Version="2.2.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\..\..\modules\BasicManagement\src\YaSha.DataManager.BasicManagement.Application\YaSha.DataManager.BasicManagement.Application.csproj" />
+        <ProjectReference Include="..\..\..\modules\DataDictionaryManagement\src\YaSha.DataManager.DataDictionaryManagement.Application\YaSha.DataManager.DataDictionaryManagement.Application.csproj" />
+        <ProjectReference Include="..\..\..\modules\NotificationManagement\src\YaSha.DataManager.NotificationManagement.Application\YaSha.DataManager.NotificationManagement.Application.csproj" />
+        <ProjectReference Include="..\..\..\modules\LanguageManagement\src\YaSha.DataManager.LanguageManagement.Application\YaSha.DataManager.LanguageManagement.Application.csproj" />
+        <ProjectReference Include="..\YaSha.DataManager.Domain\YaSha.DataManager.Domain.csproj" />
+        <ProjectReference Include="..\YaSha.DataManager.Application.Contracts\YaSha.DataManager.Application.Contracts.csproj" />
+        <ProjectReference Include="..\YaSha.DataManager.FreeSqlRepository\YaSha.DataManager.FreeSqlRepository.csproj" />
+    </ItemGroup>
+
+
+</Project>

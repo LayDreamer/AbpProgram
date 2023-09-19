@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  
+
+    <PropertyGroup>
+        <TargetFramework>net7.0</TargetFramework>
+        <RootNamespace>YaSha.DataManager.FileManagement</RootNamespace>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Microsoft.NET.Test.Sdk" />
+        <ProjectReference Include="..\YaSha.DataManager.FileManagement.EntityFrameworkCore.Tests\YaSha.DataManager.FileManagement.EntityFrameworkCore.Tests.csproj" />
+    </ItemGroup>
+
+</Project>

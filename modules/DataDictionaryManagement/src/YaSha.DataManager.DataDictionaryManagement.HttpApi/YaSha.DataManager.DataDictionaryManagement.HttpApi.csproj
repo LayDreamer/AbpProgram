@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net7.0</TargetFramework>
+        <RootNamespace>YaSha.DataManager.DataDictionaryManagement</RootNamespace>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Swashbuckle.AspNetCore.Annotations" />
+        <PackageReference Include="Volo.Abp.AspNetCore.Mvc" />
+        <ProjectReference Include="..\YaSha.DataManager.DataDictionaryManagement.Application.Contracts\YaSha.DataManager.DataDictionaryManagement.Application.Contracts.csproj" />
+    </ItemGroup>
+
+</Project>

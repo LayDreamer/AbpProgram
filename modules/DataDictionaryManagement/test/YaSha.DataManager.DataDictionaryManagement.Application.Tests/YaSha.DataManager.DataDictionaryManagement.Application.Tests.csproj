@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+
+    <PropertyGroup>
+        <TargetFramework>net7.0</TargetFramework>
+        <RootNamespace>YaSha.DataManager.DataDictionaryManagement</RootNamespace>
+        <IsPackable>false</IsPackable>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\..\src\YaSha.DataManager.DataDictionaryManagement.Application\YaSha.DataManager.DataDictionaryManagement.Application.csproj" />
+        <ProjectReference Include="..\YaSha.DataManager.DataDictionaryManagement.Domain.Tests\YaSha.DataManager.DataDictionaryManagement.Domain.Tests.csproj" />
+        <PackageReference Include="Microsoft.NET.Test.Sdk" />
+    </ItemGroup>
+
+</Project>

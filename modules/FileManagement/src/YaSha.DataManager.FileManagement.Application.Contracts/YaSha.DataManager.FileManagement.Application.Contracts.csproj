@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+
+    <PropertyGroup>
+		<TargetFramework>net7.0</TargetFramework>
+        <RootNamespace>YaSha.DataManager.FileManagement</RootNamespace>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Volo.Abp.Ddd.Application.Contracts" />
+        <PackageReference Include="Volo.Abp.Authorization" />
+        <ProjectReference Include="..\YaSha.DataManager.FileManagement.Domain.Shared\YaSha.DataManager.FileManagement.Domain.Shared.csproj" />
+    </ItemGroup>
+
+</Project>

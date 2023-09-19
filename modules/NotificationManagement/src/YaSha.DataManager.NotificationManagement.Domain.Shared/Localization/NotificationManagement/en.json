@@ -1,0 +1,14 @@
+{
+  "culture": "en",
+  "texts": {
+    "ManageYourProfile":  "Manage your profile",
+    "SamplePageMessage": "A sample page for the NotificationManagement module",
+    "YaSha.DataManager.NotificationManagement:100001": "Receiver Not Null",
+    "YaSha.DataManager.NotificationManagement:100002": "Message Not Exist",
+    "YaSha.DataManager.NotificationManagement:100003": "MessageType Unknown",
+    "YaSha.DataManager.NotificationManagement:100004": "User UnSubscription",
+    "YaSha.DataManager.NotificationManagement:100005": "Message Title NotNull",
+    "YaSha.DataManager.NotificationManagement:100006": "Message Content NotNull",
+    "YaSha.DataManager.NotificationManagement:100007": "Message Receiver NotNull"
+  }
+}

@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  
+
+  <PropertyGroup>
+	<TargetFramework>net7.0</TargetFramework>
+    <RootNamespace>YaSha.DataManager</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\modules\BasicManagement\src\YaSha.DataManager.BasicManagement.HttpApi.Client\YaSha.DataManager.BasicManagement.HttpApi.Client.csproj" />
+    <ProjectReference Include="..\..\..\modules\DataDictionaryManagement\src\YaSha.DataManager.DataDictionaryManagement.HttpApi.Client\YaSha.DataManager.DataDictionaryManagement.HttpApi.Client.csproj" />
+    <ProjectReference Include="..\..\..\modules\NotificationManagement\src\YaSha.DataManager.NotificationManagement.HttpApi.Client\YaSha.DataManager.NotificationManagement.HttpApi.Client.csproj" />
+    <ProjectReference Include="..\..\..\modules\LanguageManagement\src\YaSha.DataManager.LanguageManagement.HttpApi.Client\YaSha.DataManager.LanguageManagement.HttpApi.Client.csproj" />
+    <ProjectReference Include="..\YaSha.DataManager.Application.Contracts\YaSha.DataManager.Application.Contracts.csproj" />
+  </ItemGroup>
+
+ 
+
+</Project>

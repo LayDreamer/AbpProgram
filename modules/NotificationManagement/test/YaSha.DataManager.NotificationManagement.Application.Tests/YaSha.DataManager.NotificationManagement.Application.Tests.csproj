@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    
+
+    <PropertyGroup>
+        <TargetFramework>net7.0</TargetFramework>
+        <RootNamespace>YaSha.DataManager.NotificationManagement</RootNamespace>
+        <IsPackable>false</IsPackable>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\..\src\YaSha.DataManager.NotificationManagement.Application\YaSha.DataManager.NotificationManagement.Application.csproj" />
+        <ProjectReference Include="..\YaSha.DataManager.NotificationManagement.Domain.Tests\YaSha.DataManager.NotificationManagement.Domain.Tests.csproj" />
+        <PackageReference Include="Microsoft.NET.Test.Sdk" />
+    </ItemGroup>
+
+</Project>

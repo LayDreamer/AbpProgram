@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net7.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="FreeSql" />
+        <PackageReference Include="FreeSql.Provider.MySql" />
+    </ItemGroup>
+    
+    <ItemGroup>
+      <ProjectReference Include="..\YaSha.DataManager.Domain\YaSha.DataManager.Domain.csproj" />
+    </ItemGroup>
+
+</Project>

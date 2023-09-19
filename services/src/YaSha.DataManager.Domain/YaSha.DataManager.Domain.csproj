@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <RootNamespace>YaSha.DataManager</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\modules\BasicManagement\src\YaSha.DataManager.BasicManagement.Domain\YaSha.DataManager.BasicManagement.Domain.csproj" />
+    <ProjectReference Include="..\..\..\modules\DataDictionaryManagement\src\YaSha.DataManager.DataDictionaryManagement.Domain\YaSha.DataManager.DataDictionaryManagement.Domain.csproj" />
+    <ProjectReference Include="..\..\..\modules\NotificationManagement\src\YaSha.DataManager.NotificationManagement.Domain\YaSha.DataManager.NotificationManagement.Domain.csproj" />
+    <ProjectReference Include="..\..\..\modules\LanguageManagement\src\YaSha.DataManager.LanguageManagement.Domain\YaSha.DataManager.LanguageManagement.Domain.csproj" />
+    <ProjectReference Include="..\YaSha.DataManager.Domain.Shared\YaSha.DataManager.Domain.Shared.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="EasyAbp.Abp.Trees.Domain" Version="2.11.0" />
+    <PackageReference Include="EasyAbp.PrivateMessaging.Domain" Version="2.2.0" />
+    <PackageReference Include="Volo.Abp.Emailing" />
+  </ItemGroup>
+
+
+
+</Project>

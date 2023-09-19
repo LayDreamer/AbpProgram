@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  
+
+    <PropertyGroup>
+        <TargetFramework>net7.0</TargetFramework>
+        <RootNamespace>YaSha.DataManager.FileManagement</RootNamespace>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Microsoft.NET.Test.Sdk" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" />
+        <ProjectReference Include="..\..\src\YaSha.DataManager.FileManagement.EntityFrameworkCore\YaSha.DataManager.FileManagement.EntityFrameworkCore.csproj" />
+        <ProjectReference Include="..\YaSha.DataManager.FileManagement.TestBase\YaSha.DataManager.FileManagement.TestBase.csproj" />
+        <PackageReference Include="Volo.Abp.EntityFrameworkCore.Sqlite" />
+    </ItemGroup>
+
+</Project>
