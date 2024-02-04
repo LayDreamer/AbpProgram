@@ -14,6 +14,8 @@ public class ProductInventMaterial : FullAuditedAggregateRoot<Guid>
 
     public string Name { get; set; }
 
+    public string Level { get; set; }
+    
     public string Code { get; set; }
 
     public string Length { get; set; }
@@ -45,6 +47,16 @@ public class ProductInventMaterial : FullAuditedAggregateRoot<Guid>
     public string Remark { get; set; }
 
     public string MaterialUsageFormula { get; set; }
+
+    public ProductInventMaterial()
+    {
+        
+    }
+
+    public ProductInventMaterial(Guid id) : base(id)
+    {
+        
+    }
     
     public void SetParentProductId(Guid id)
     {

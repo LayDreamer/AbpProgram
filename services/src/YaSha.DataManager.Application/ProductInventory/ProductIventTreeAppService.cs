@@ -1,4 +1,4 @@
-﻿using SixLabors.ImageSharp.Processing;
+﻿//using SixLabors.ImageSharp.Processing;
 using YaSha.DataManager.ProductInventory.Dto;
 using YaSha.DataManager.ProductInventory.Manager;
 

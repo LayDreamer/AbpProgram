@@ -2,10 +2,9 @@
 using System.Linq.Expressions;
 using Volo.Abp.Auditing;
 using Volo.Abp.Domain.Repositories.EntityFrameworkCore;
-using YaSha.DataManager.Common;
 using YaSha.DataManager.EntityFrameworkCore;
 using YaSha.DataManager.ProductInventory.AggregateRoot;
-using YaSha.DataManager.Repository.ProductInventory;
+using YaSha.DataManager.ProductInventory.Repository;
 
 namespace YaSha.DataManager.ProductInventory;
 
@@ -35,12 +34,12 @@ public class ProductInvProductRepository : EfCoreRepository<DataManagerDbContext
     public async Task<List<ProductInventProduct>> FindProductIndex(string system, string series, string name, string code, string sorting, bool include = false)
     {
         var query = (await GetDbSetAsync()).IncludeProductDetails(include);
-        query = query.Where(x => 
-            (string.IsNullOrEmpty(system) || x.System.Contains(system))&&
-            (string.IsNullOrEmpty(series) || x.Series.Contains(series))&&
-            (string.IsNullOrEmpty(name) || x.Name.Contains(name))&&
+        query = query.Where(x =>
+            (string.IsNullOrEmpty(system) || x.System.Contains(system)) &&
+            (string.IsNullOrEmpty(series) || x.Series.Contains(series)) &&
+            (string.IsNullOrEmpty(name) || x.Name.Contains(name)) &&
             (string.IsNullOrEmpty(code) || x.Code.Contains(code))
-            );
+        );
         if (!string.IsNullOrEmpty(sorting))
         {
             query = query.OrderBy(sorting);
@@ -50,6 +49,7 @@ public class ProductInvProductRepository : EfCoreRepository<DataManagerDbContext
             query = query.OrderByDescending<ProductInventProduct, DateTime>(
                 (Expression<Func<ProductInventProduct, DateTime>>)(e => ((IHasCreationTime)e).CreationTime));
         }
+
         return await AsyncExecuter.ToListAsync(query);
     }
 
@@ -61,35 +61,43 @@ public class ProductInvProductRepository : EfCoreRepository<DataManagerDbContext
             .FirstOrDefaultAsync();
     }
 
+    public async Task<ProductInventProduct> FindByCode(string code, bool include = false)
+    {
+        return await (await GetDbSetAsync())
+            .IncludeProductDetails(include)
+            .Where(x => x.Code == code)
+            .FirstOrDefaultAsync();
+    }
+
     public async Task<List<ProductInventProduct>> FindByIds(List<Guid> ids, bool include = false)
     {
         return await (await GetDbSetAsync())
             .IncludeProductDetails(include)
-            .Where(x => ids.Any(y=>y.Equals(x.Id)))
+            .Where(x => ids.Any(y => y.Equals(x.Id)))
             .ToListAsync();
     }
 
     public async Task<IQueryable<ProductInventProduct>> FindProductsByTreeIdsAndNameCode(IEnumerable<Guid> ids,
-        string inputName, string inputCode)
+        string inputName, string inputCode, ProductInventoryPublishStatus status)
     {
         IQueryable<ProductInventProduct> query;
         if (string.IsNullOrEmpty(inputName) && string.IsNullOrEmpty(inputCode))
         {
             query = (await GetDbSetAsync())
                 .IncludeProductDetails(false)
-                .Where(x => ids.Any(y => y.Equals(x.ParentId)));
+                .Where(x => x.Status.Equals(status) && ids.Any(y => y.Equals(x.ParentId)));
         }
         else
         {
             query = (await GetDbSetAsync())
-                .IncludeProductDetails(true)
-                .Where(x => ids.Any(y => y.Equals(x.ParentId)));
+                .IncludeProductDetails()
+                .Where(x => x.Status.Equals(status) && ids.Any(y => y.Equals(x.ParentId)));
             if (!string.IsNullOrEmpty(inputName))
             {
                 query = query.Where(x =>
                     x.Name.Contains(inputName)
                     || x.Materials.Any(y => y.Name.Contains(inputName)
-                    || x.Modules.Any(y => y.Name.Contains(inputName) || y.Materials.Any(z => z.Name.Contains(inputName)))));
+                                            || x.Modules.Any(y => y.Name.Contains(inputName) || y.Materials.Any(z => z.Name.Contains(inputName)))));
             }
 
             if (!string.IsNullOrEmpty(inputCode))

@@ -15,9 +15,14 @@ RUN echo "deb http://mirrors.aliyun.com/debian/ bullseye main non-free contrib" 
     echo "deb-src http://mirrors.aliyun.com/debian/ bullseye-backports main non-free contrib" >> /etc/apt/sources.list && \
     apt-get update && \
     apt-get install libgdiplus libc6-dev -y && \
+    apt-get install -y --no-install-recommends libldap-2.4-2 &&\
+    apt-get install -y --no-install-recommends libldap-common &&\
+    rm -rf /var/lib/apt/lists/* &&\
+    ln -s -f /usr/lib/x86_64-linux-gnu/libldap-2.4.so.2 /usr/lib/x86_64-linux-gnu/libldap.so.2 &&\
+    ln -s -f /usr/lib/x86_64-linux-gnu/liblber-2.4.so.2 /usr/lib/x86_64-linux-gnu/liblber.so.2 &&\
     ln -s /usr/lib/libgdiplus.so /usr/lib/gdiplus.dll && \
     ln -s /usr/lib/x86_64-linux-gnu/libdl.so /usr/lib/libdl.dll && apt-get clean
-    
+
 # 设置工作目录
 WORKDIR /app
 

@@ -1,7 +1,7 @@
 using YaSha.DataManager.BasicManagement.ConfigurationOptions;
 using YaSha.DataManager.BasicManagement.Roles;
-using Magicodes.ExporterAndImporter.Core;
-using Magicodes.ExporterAndImporter.Excel;
+//using Magicodes.ExporterAndImporter.Core;
+//using Magicodes.ExporterAndImporter.Excel;
 using Volo.Abp.Account;
 using Volo.Abp.AutoMapper;
 using Volo.Abp.Modularity;
@@ -34,7 +34,7 @@ public class BasicManagementApplicationModule : AbpModule
         context.Services.AddAutoMapperObjectMapper<BasicManagementApplicationModule>();
         Configure<AbpAutoMapperOptions>(options =>
         {
-            options.AddMaps<BasicManagementApplicationModule>(validate: true);
+            options.AddMaps<BasicManagementApplicationModule>(validate: false);
         });
         
         Configure<PermissionOptions>(options =>
@@ -61,7 +61,7 @@ public class BasicManagementApplicationModule : AbpModule
     /// </summary>
     private void ConfigureMagicodes(ServiceConfigurationContext context)
     {
-        context.Services.AddTransient<IExporter, ExcelExporter>();
-        context.Services.AddTransient<IExcelExporter, ExcelExporter>();
+        //context.Services.AddTransient<IExporter, ExcelExporter>();
+        //context.Services.AddTransient<IExcelExporter, ExcelExporter>();
     }
 }

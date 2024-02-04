@@ -8,6 +8,8 @@ public class ProductInventoryMaterialDto : AuditedEntityDto<Guid>
     
     public string Code { get; set; }
     
+    public string Level { get; set; }
+    
     public string Length { get; set; }
     
     public string Width { get; set; }

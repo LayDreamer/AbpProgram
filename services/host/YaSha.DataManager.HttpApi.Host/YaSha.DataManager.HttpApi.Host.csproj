@@ -66,8 +66,54 @@
     </ItemGroup>
 
     <ItemGroup>
+      <None Remove="Resource\下市方案模板.xlsx" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <EmbeddedResource Include="Resource\下市方案模板.xlsx" />
+    </ItemGroup>
+
+    <ItemGroup>
       <None Update="Dockerfile">
         <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       </None>
+    </ItemGroup>
+
+    <ItemGroup>
+      <_ContentIncludedByDefault Remove="publish\publish\publish\publish\publish\publish\publish\web.config" />
+      <_ContentIncludedByDefault Remove="publish\publish\publish\publish\publish\publish\web.config" />
+      <_ContentIncludedByDefault Remove="publish\publish\publish\publish\publish\web.config" />
+      <_ContentIncludedByDefault Remove="publish\publish\publish\publish\web.config" />
+      <_ContentIncludedByDefault Remove="publish\publish\publish\web.config" />
+      <_ContentIncludedByDefault Remove="publish\publish\web.config" />
+      <_ContentIncludedByDefault Remove="publish\web.config" />
+      <_ContentIncludedByDefault Remove="publish\appsettings.json" />
+      <_ContentIncludedByDefault Remove="publish\appsettings.Production.json" />
+      <_ContentIncludedByDefault Remove="publish\publish\appsettings.json" />
+      <_ContentIncludedByDefault Remove="publish\publish\appsettings.Production.json" />
+      <_ContentIncludedByDefault Remove="publish\publish\publish\appsettings.json" />
+      <_ContentIncludedByDefault Remove="publish\publish\publish\appsettings.Production.json" />
+      <_ContentIncludedByDefault Remove="publish\publish\publish\publish\appsettings.json" />
+      <_ContentIncludedByDefault Remove="publish\publish\publish\publish\appsettings.Production.json" />
+      <_ContentIncludedByDefault Remove="publish\publish\publish\publish\publish\appsettings.json" />
+      <_ContentIncludedByDefault Remove="publish\publish\publish\publish\publish\appsettings.Production.json" />
+      <_ContentIncludedByDefault Remove="publish\publish\publish\publish\publish\publish\appsettings.json" />
+      <_ContentIncludedByDefault Remove="publish\publish\publish\publish\publish\publish\appsettings.Production.json" />
+      <_ContentIncludedByDefault Remove="publish\publish\publish\publish\publish\publish\publish\appsettings.json" />
+      <_ContentIncludedByDefault Remove="publish\publish\publish\publish\publish\publish\publish\appsettings.Production.json" />
+      <_ContentIncludedByDefault Remove="publish\publish\publish\publish\publish\publish\publish\YaSha.DataManager.HttpApi.Host.deps.json" />
+      <_ContentIncludedByDefault Remove="publish\publish\publish\publish\publish\publish\publish\YaSha.DataManager.HttpApi.Host.runtimeconfig.json" />
+      <_ContentIncludedByDefault Remove="publish\publish\publish\publish\publish\publish\YaSha.DataManager.HttpApi.Host.deps.json" />
+      <_ContentIncludedByDefault Remove="publish\publish\publish\publish\publish\publish\YaSha.DataManager.HttpApi.Host.runtimeconfig.json" />
+      <_ContentIncludedByDefault Remove="publish\publish\publish\publish\publish\YaSha.DataManager.HttpApi.Host.deps.json" />
+      <_ContentIncludedByDefault Remove="publish\publish\publish\publish\publish\YaSha.DataManager.HttpApi.Host.runtimeconfig.json" />
+      <_ContentIncludedByDefault Remove="publish\publish\publish\publish\YaSha.DataManager.HttpApi.Host.deps.json" />
+      <_ContentIncludedByDefault Remove="publish\publish\publish\publish\YaSha.DataManager.HttpApi.Host.runtimeconfig.json" />
+      <_ContentIncludedByDefault Remove="publish\publish\publish\YaSha.DataManager.HttpApi.Host.deps.json" />
+      <_ContentIncludedByDefault Remove="publish\publish\publish\YaSha.DataManager.HttpApi.Host.runtimeconfig.json" />
+      <_ContentIncludedByDefault Remove="publish\publish\YaSha.DataManager.HttpApi.Host.deps.json" />
+      <_ContentIncludedByDefault Remove="publish\publish\YaSha.DataManager.HttpApi.Host.runtimeconfig.json" />
+      <_ContentIncludedByDefault Remove="publish\YaSha.DataManager.HttpApi.Host.deps.json" />
+      <_ContentIncludedByDefault Remove="publish\YaSha.DataManager.HttpApi.Host.runtimeconfig.json" />
     </ItemGroup>
 </Project>

@@ -1,7 +1,7 @@
 ﻿using Volo.Abp;
 using YaSha.DataManager.ProductInventory.AggregateRoot;
 using YaSha.DataManager.ProductInventory.Dto;
-using YaSha.DataManager.Repository.ProductInventory;
+using YaSha.DataManager.ProductInventory.Repository;
 
 namespace YaSha.DataManager.ProductInventory.Manager;
 

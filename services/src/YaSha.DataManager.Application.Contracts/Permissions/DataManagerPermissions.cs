@@ -42,7 +42,78 @@ namespace YaSha.DataManager.Permissions
 
         }
 
-       
-       
+        public static class StandardPolicy
+        {
+            public const string Default = GroupName + ".StandardPolicy";
+            public const string Delete = Default + ".Delete";
+            public const string Update = Default + ".Update";
+            public const string Create = Default + ".Create";
+        }
+
+        public static class ProcessingList
+        {
+            public const string Default = GroupName + ".ProcessingList";
+            public const string Delete = Default + ".Delete";
+            public const string Update = Default + ".Update";
+            public const string Create = Default + ".Create";
+        }
+
+        public static class ListProcessing
+        {
+            public const string Default = GroupName + ".ListProcessing";
+            public const string Delete = Default + ".Delete";
+            public const string Update = Default + ".Update";
+            public const string Create = Default + ".Create";
+        }
+
+        public static class MeasuringExcel
+        {
+            public const string Default = GroupName + ".MeasuringExcel";
+            public const string Delete = Default + ".Delete";
+            public const string Update = Default + ".Update";
+            public const string Create = Default + ".Create";
+        }
+        //public static class NewProductList
+        //{
+        //    public const string Default = GroupName + ".NewProductList";
+        //    public const string Delete = Default + ".Delete";
+        //    public const string Update = Default + ".Update";
+        //    public const string Create = Default + ".Create";
+        //}
+
+        public static class SaleOder
+        {
+            public const string Default = GroupName + ".SaleOder";
+            public const string Delete = Default + ".Delete";
+            public const string Update = Default + ".Update";
+            public const string Create = Default + ".Create";
+        }
+
+        public static class NewFamilyLib
+        {
+            public const string Default = GroupName + ".NewFamilyLib";
+            public const string Delete = Default + ".Delete";
+            public const string Update = Default + ".Update";
+            public const string Create = Default + ".Create";
+        }
+
+        
+        public static class MaterialManage
+        {
+            public const string Default = GroupName + ".MaterialManage";
+            public const string Delete = Default + ".Delete";
+            public const string Update = Default + ".Update";
+            public const string Create = Default + ".Create";
+        }
+
+        public static class ArchitectureList
+        {
+            public const string Default = GroupName + ".ArchitectureList";
+            public const string SolidifyEdit = Default + ".SolidifyEdit";
+            public const string ProjectEdit = Default + ".ProjectEdit";
+            //public const string View = Default + ".View";
+            public const string Download = Default + ".Download";
+        }
+
     }
 }

@@ -1,6 +1,7 @@
 using AutoMapper;
 using YaSha.DataManager.BasicManagement.AuditLogs;
 using YaSha.DataManager.BasicManagement.Users.Dtos;
+using YaSha.DataManager.Domain;
 
 namespace YaSha.DataManager.BasicManagement;
 
@@ -32,5 +33,9 @@ public class BasicManagementApplicationAutoMapperProfile : Profile
         CreateMap<IdentityUser, GetUnAddUserOutput>();
         CreateMap<IdentityRole, GetOrganizationUnitRoleOutput>();
         CreateMap<IdentityRole, GetUnAddRoleOutput>();
+        CreateMap<DomainUserDto,DomainUser>();
+        CreateMap<DomainUser,DomainUserDto>();
+
+
     }
 }

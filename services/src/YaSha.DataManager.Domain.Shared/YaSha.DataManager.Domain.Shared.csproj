@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
 
     <PropertyGroup>
@@ -26,13 +26,17 @@
         <ProjectReference Include="..\..\..\modules\DataDictionaryManagement\src\YaSha.DataManager.DataDictionaryManagement.Domain.Shared\YaSha.DataManager.DataDictionaryManagement.Domain.Shared.csproj" />
         <ProjectReference Include="..\..\..\modules\NotificationManagement\src\YaSha.DataManager.NotificationManagement.Domain.Shared\YaSha.DataManager.NotificationManagement.Domain.Shared.csproj" />
         <ProjectReference Include="..\..\..\modules\LanguageManagement\src\YaSha.DataManager.LanguageManagement.Domain.Shared\YaSha.DataManager.LanguageManagement.Domain.Shared.csproj" />
+
+
+
+
+
+
+   
+
     </ItemGroup>
 
-    <ItemGroup>
-      <Reference Include="YaSha.DataManager.Domain">
-        <HintPath>..\YaSha.DataManager.DbMigrator\bin\Debug\net7.0\YaSha.DataManager.Domain.dll</HintPath>
-      </Reference>
-    </ItemGroup>
+
 
 
 </Project>

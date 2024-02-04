@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   
 
@@ -6,6 +6,20 @@
     <TargetFramework>net7.0</TargetFramework>
     <RootNamespace>YaSha.DataManager</RootNamespace>
   </PropertyGroup>
+
+  
+
+  <ItemGroup>
+    <Compile Remove="ProcessingLists\新文件夹1\**" />
+    <EmbeddedResource Remove="ProcessingLists\新文件夹1\**" />
+    <None Remove="ProcessingLists\新文件夹1\**" />
+  </ItemGroup>
+
+  
+
+  <ItemGroup>
+    <Compile Remove="ProcessingLists\Repository\IProcessingListRepository.cs" />
+  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\modules\BasicManagement\src\YaSha.DataManager.BasicManagement.Domain\YaSha.DataManager.BasicManagement.Domain.csproj" />
@@ -18,8 +32,23 @@
   <ItemGroup>
     <PackageReference Include="EasyAbp.Abp.Trees.Domain" Version="2.11.0" />
     <PackageReference Include="EasyAbp.PrivateMessaging.Domain" Version="2.2.0" />
+    <PackageReference Include="EPPlus" Version="6.2.9" />
+    <PackageReference Include="Microsoft.AspNetCore.Http.Features" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="Volo.Abp.Emailing" />
+
+
+
+
+
+
+
+
+
   </ItemGroup>
+
+
 
 
 

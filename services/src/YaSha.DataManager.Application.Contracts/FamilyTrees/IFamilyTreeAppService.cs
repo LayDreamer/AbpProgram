@@ -11,9 +11,17 @@ namespace YaSha.DataManager.FamilyTrees
         ICrudAppService<
             FamilyTreeDto,
             Guid,
-            PagedAndSortedResultRequestDto>
+            PagedAndSortedResultRequestDto,
+            FamilyTreeCreateDto
+           >
     {
-        Task<PagedResultDto<FamilyTreeDto>> GetTreeListAsync();
+        Task<List<FamilyTreeDto>> GetTreeListAsync();
 
+
+        Task<List<FamilyTreeDto>> CreateListAsync(List<FamilyTreeCreateDto> dtos);
+
+        Task DeleteListAsync(List<FamilyTreeDto> dtos);
+
+        Task<List<Guid>> GetCategoryTreeChildrenGuids(Guid id);
     }
 }

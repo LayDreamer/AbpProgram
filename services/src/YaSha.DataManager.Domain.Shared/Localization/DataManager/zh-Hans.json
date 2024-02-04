@@ -9,6 +9,7 @@
     "Permission:Create": "创建",
     "Permission:Update": "编辑",
     "Permission:Delete": "删除",
+    "Permission:Download": "下载",
     "Permission:Export": "导出",
     "Permission:Enable": "启用|禁用",
     "Permission:AuditLogManagement": "审计日志",
@@ -29,11 +30,26 @@
     "YaSha.DataManager:100001": "产品系统和系列不能为空",
     "YaSha.DataManager:100002": "输入系统有误",
     "YaSha.DataManager:100003": "输入系列有误",
+    "YaSha.DataManager:LoginOver": "登录过期",
 
     "Permission:YaShaDataManager": "亚厦数据管理",
     "Permission:ProductManagement": "产品管理",
     "Permission:ProductRetrieval": "产品检索",
     "Permission:FamilyLib": "族库列表",
-    "Permission:ProductList": "产品架构清单"
+    "Permission:ProductList": "产品架构清单",
+    "Permission:StandardPolicy": "工业化装配标准与政策",
+    "Permission:Checklist": "清单列表",
+    "Permission:ProcessingList": "内加工清单",
+    "Permission:ListProcessing": "制造拆单",
+    "Permission:MeasuringExcel": "量房数据表",
+    "Permission:NewProductList": "新产品架构清单",
+    "Permission:SaleOder": "销售订单",
+    "Permission:NewFamilyLib": "新族库列表",
+    "Permission:MaterialManage": "材质库管理",
+
+    "Permission:ArchitectureList": "产品模块清单",
+    "Permission:SolidifyEdit": "固化编辑",
+    "Permission:ProjectEdit": "项目编辑",
+    "Permission:View": "查看"
   }
 }

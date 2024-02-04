@@ -1,14 +1,10 @@
-﻿using System.Linq.Expressions;
-using AutoMapper.Internal.Mappers;
-using JetBrains.Annotations;
+﻿using JetBrains.Annotations;
 using Volo.Abp;
 using Volo.Abp.Application.Dtos;
 using Volo.Abp.Caching;
-using YaSha.DataManager.Common;
 using YaSha.DataManager.ProductInventory.AggregateRoot;
 using YaSha.DataManager.ProductInventory.Dto;
-using YaSha.DataManager.ProductRetrieval.Dto;
-using YaSha.DataManager.Repository.ProductInventory;
+using YaSha.DataManager.ProductInventory.Repository;
 
 namespace YaSha.DataManager.ProductInventory.Manager;
 
@@ -24,7 +20,7 @@ public class ProductInventProductManager : DataManagerDomainService
         IProductInvProductRepository productRepository,
         IProductInvModuleRepository moduleRepository,
         IProductInvMaterialRepository materialRepository,
-        IDistributedCache<ProductInventoryFullDto>  distributedCache)
+        IDistributedCache<ProductInventoryFullDto> distributedCache)
     {
         _treeRepository = repository;
         _productRepository = productRepository;
@@ -46,7 +42,7 @@ public class ProductInventProductManager : DataManagerDomainService
     }
 
     public async Task<List<ProductInventoryProductDto>> ImportFromExcel(string userName, [NotNull] string system,
-        [NotNull] string series, List<ProductInventoryProductCreateDto> dtos)
+        [NotNull] string series, string remark, List<ProductInventoryProductCreateDto> dtos)
     {
         if (system == null) throw new ArgumentNullException(nameof(system));
         if (series == null) throw new ArgumentNullException(nameof(series));
@@ -54,9 +50,19 @@ public class ProductInventProductManager : DataManagerDomainService
         if (dtos.Count == 0) return results;
         var roots = await _treeRepository.GetRootTree();
         var findSystem = roots.FirstOrDefault(x => x.Name == "产品")?.Children.FirstOrDefault(x => x.Name == system);
-        Check.NotNull<ProductInventTree>(findSystem, "findSystem");
+        if (findSystem == null)
+        {
+            throw new BusinessException(ProductInventoryErrorCode.ErrorSystem);
+        }
+
         var findSeries = findSystem.Children.FirstOrDefault(x => x.Name == series);
-        Check.NotNull<ProductInventTree>(findSeries, "findSeries");
+        if (findSeries == null)
+        {
+            throw new BusinessException(ProductInventoryErrorCode.ErrorSeries);
+        }
+
+        findSeries.Remark = remark;
+        await _treeRepository.UpdateAsync(findSeries, autoSave: true);
 
         foreach (var item in dtos)
         {
@@ -74,7 +80,7 @@ public class ProductInventProductManager : DataManagerDomainService
         }
 
         var roots = await _treeRepository.GetRootTree();
-        var findSystem = roots.FirstOrDefault(x=>x.Name=="产品")?.Children.FirstOrDefault(x => x.Name == dto.Data.System);
+        var findSystem = roots.FirstOrDefault(x => x.Name == "产品")?.Children.FirstOrDefault(x => x.Name == dto.Data.System);
         if (findSystem == null)
         {
             throw new BusinessException(ProductInventoryErrorCode.ErrorSystem);
@@ -128,6 +134,7 @@ public class ProductInventProductManager : DataManagerDomainService
             var createProduct = ObjectMapper.Map<ProductInventoryProductCreateDto, ProductInventProduct>(createDto);
             createProduct.SetParentId(product.ParentId);
             createProduct.SetCopyName();
+            createProduct.ImagePath = product.ImagePath;
             createProduct.CreateUser = createUser;
             createProduct.Status = ProductInventoryPublishStatus.DelayInMark;
             copys.Add(createProduct);
@@ -241,6 +248,7 @@ public class ProductInventProductManager : DataManagerDomainService
         product.ProjectName = dto.ProjectName;
         product.ProductSpecification = dto.ProductSpecification;
         product.LimitInfos = dto.LimitInfos;
+        product.Remark = dto.Remark;
     }
 
     private static void UpdateModule(ProductInventModule module, ProductInventoryEditDto dto)
@@ -262,6 +270,7 @@ public class ProductInventProductManager : DataManagerDomainService
     {
         material.Code = dto.Code;
         material.Name = dto.Name;
+        material.Level = dto.Level;
         material.Length = dto.Length;
         material.Width = dto.Width;
         material.Height = dto.Height;
@@ -294,14 +303,14 @@ public class ProductInventProductManager : DataManagerDomainService
                 if (product == null) return;
                 product.ModifiyUser = updateUser;
                 UpdateProduct(product, dto.Data);
-                await _productRepository.UpdateAsync(product, autoSave:true);
+                await _productRepository.UpdateAsync(product, autoSave: true);
             }
         }
         else if (dto.Tag == ProductInventroyTag.Modules)
         {
             if (dto.Status == ProductInventoryModifyStatus.Modify)
             {
-                var module = await _moduleRepository.FindAsync(dto.Data.Id, includeDetails:false);
+                var module = await _moduleRepository.FindAsync(dto.Data.Id, includeDetails: false);
                 if (module == null) return;
                 UpdateModule(module, dto.Data);
                 await _moduleRepository.UpdateAsync(module, autoSave: true);
@@ -333,6 +342,7 @@ public class ProductInventProductManager : DataManagerDomainService
                 {
                     if (dto.ParentId != null) insertMaterial.SetParentModuleId(dto.ParentId.Value);
                 }
+
                 await _materialRepository.InsertAsync(insertMaterial, autoSave: true);
             }
         }
@@ -344,6 +354,18 @@ public class ProductInventProductManager : DataManagerDomainService
     }
 
 
+    public async Task UpdateProductImage(string updateUser, Guid id, string imagePath)
+    {
+        var product = await _productRepository.FindById(id);
+
+        if (product != null)
+        {
+            product.ImagePath = imagePath;
+            product.ModifiyUser = updateUser;
+            await _productRepository.UpdateAsync(product);
+        }
+    }
+
     public async Task<List<ProductInventoryProductDto>> PublishProducts(Dictionary<Guid, ProductInventoryPublishStatus> dto)
     {
         var results = new List<ProductInventoryProductDto>();
@@ -353,30 +375,46 @@ public class ProductInventProductManager : DataManagerDomainService
             var product = await _productRepository.FindById(item.Key);
             if (product == null) continue;
             product.Status = item.Value;
-            results.Add(ObjectMapper.Map<ProductInventProduct,ProductInventoryProductDto>(product));
+            results.Add(ObjectMapper.Map<ProductInventProduct, ProductInventoryProductDto>(product));
             update.Add(product);
         }
 
         await _productRepository.UpdateManyAsync(update, autoSave: true);
         return results;
     }
-    
+
     #endregion
 
 
     #region 查
 
     public async Task<PagedResultDto<ProductInventoryProductDto>> FindProductBySearchDto(
-        OrderNotificationSearchDto input)
+        string key,
+        string searchValue,
+        string searchCode,
+        ProductInventoryPublishStatus status,
+        string sorting,
+        int skipCount,
+        int maxResultCount)
     {
-        var trees = await _treeRepository.GetChildren(Guid.Parse(input.Key));
+        if (string.IsNullOrEmpty(key))
+        {
+            return new PagedResultDto<ProductInventoryProductDto>()
+            {
+                TotalCount = 0,
+                Items = new List<ProductInventoryProductDto>(),
+            };
+        }
+
+
+        var trees = await _treeRepository.GetChildren(Guid.Parse(key));
 
         var query = await _productRepository.FindProductsByTreeIdsAndNameCode(trees.Select(x => x.Id),
-            input.SearchValue, input.SearchCode);
+            searchValue, searchCode, status);
 
         var totalCount = await AsyncExecuter.CountAsync(query);
 
-        query = _productRepository.SortAndPageProducts(query, input.Sorting, input.SkipCount, input.MaxResultCount);
+        query = _productRepository.SortAndPageProducts(query, sorting, skipCount, maxResultCount);
 
         var entities = await AsyncExecuter.ToListAsync(query);
 
@@ -406,6 +444,22 @@ public class ProductInventProductManager : DataManagerDomainService
                 materialDto.InModuleMaterial = true;
                 fullModule.AddMaterial(materialDto);
             }
+
+            fullModule.Children = fullModule.Children.OrderBy(x =>
+            {
+                if (!string.IsNullOrEmpty(x.Data.Level))
+                {
+                    if (x.Data.Level.Contains('.'))
+                    {
+                        return int.Parse(x.Data.Level.Split('.')[1]);
+                    }
+
+                    double.TryParse(x.Data.Level, out double d);
+                    return d;
+                }
+
+                return 1e3;
+            }).ToList();
         }
 
         foreach (var dto in product.Materials.Select(material =>
@@ -414,7 +468,23 @@ public class ProductInventProductManager : DataManagerDomainService
             root.AddMaterial(dto);
         }
 
+        root.Children = root.Children.OrderBy(x =>
+        {
+            if (!string.IsNullOrEmpty(x.Data.Level))
+            {
+                if (x.Data.Level.Contains('.'))
+                {
+                    return int.Parse(x.Data.Level.Split('.')[1]);
+                }
+
+                double.TryParse(x.Data.Level, out double d);
+                return d;
+            }
+
+            return 1e3;
+        }).ToList();
         return root;
     }
+
     #endregion
 }

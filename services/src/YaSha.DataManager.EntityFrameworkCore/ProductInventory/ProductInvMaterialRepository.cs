@@ -4,7 +4,7 @@ using Volo.Abp.Auditing;
 using Volo.Abp.Domain.Repositories.EntityFrameworkCore;
 using YaSha.DataManager.EntityFrameworkCore;
 using YaSha.DataManager.ProductInventory.AggregateRoot;
-using YaSha.DataManager.Repository.ProductInventory;
+using YaSha.DataManager.ProductInventory.Repository;
 
 namespace YaSha.DataManager.ProductInventory;
 
@@ -26,6 +26,13 @@ public class ProductInvMaterialRepository : EfCoreRepository<DataManagerDbContex
     {
         if (ids.Count == 0) return;
         await base.DeleteManyAsync(ids, autoSave: true);
+    }
+
+    public async Task<List<ProductInventMaterial>> FindByCode(string code)
+    {
+        return await (await GetDbSetAsync())
+            .Where(x => x.Code == code)
+            .ToListAsync();
     }
 
     public async Task<List<ProductInventMaterial>> FindMaterialIndex(string system, string series, string name,

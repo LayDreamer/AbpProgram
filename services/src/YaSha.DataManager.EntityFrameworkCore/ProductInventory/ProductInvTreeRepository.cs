@@ -2,7 +2,7 @@
 using Volo.Abp.Domain.Repositories.EntityFrameworkCore;
 using YaSha.DataManager.EntityFrameworkCore;
 using YaSha.DataManager.ProductInventory.AggregateRoot;
-using YaSha.DataManager.Repository.ProductInventory;
+using YaSha.DataManager.ProductInventory.Repository;
 
 namespace YaSha.DataManager.ProductInventory;
 
@@ -14,16 +14,14 @@ public class ProductInvTreeRepository : EfCoreRepository<DataManagerDbContext, P
     {
     }
 
-    public async Task InitProductInvTree(ProductInventTree root)
+    public async Task InitProductInvTree(List<ProductInventTree> roots)
     {
         if (await base.GetCountAsync() == 0)
         {
-            var trees = GetRootAllTrees(root);
-            await base.InsertManyAsync(trees, autoSave: true);
-        }
-        else
-        {
-            throw new Exception("初始化ProductInvTree失败原因表中已存在数据");
+            foreach (var trees in roots.Select(root => GetRootAllTrees(root)))
+            {
+                await base.InsertManyAsync(trees, autoSave: true);
+            }
         }
     }
 
@@ -46,6 +44,14 @@ public class ProductInvTreeRepository : EfCoreRepository<DataManagerDbContext, P
         }
 
         return childrens;
+    }
+
+    public async Task<ProductInventTree> GetTreeByName(string name, bool include = false)
+    {
+        return await (await GetDbSetAsync())
+            .IncludeTreeDetails(include)
+            .Where(x => x.Name == name)
+            .FirstOrDefaultAsync();
     }
 
     public override async Task<IQueryable<ProductInventTree>> WithDetailsAsync()

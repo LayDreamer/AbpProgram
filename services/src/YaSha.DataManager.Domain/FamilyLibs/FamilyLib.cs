@@ -1,14 +1,8 @@
-﻿using EasyAbp.Abp.Trees;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Volo.Abp.Domain.Entities.Auditing;
+﻿using Volo.Abp.Domain.Entities.Auditing;
 
 namespace YaSha.DataManager.FamilyLibs
 {
-    public class FamilyLib : AuditedAggregateRoot<Guid>, ITree<FamilyLib>
+    public class FamilyLib : AuditedAggregateRoot<Guid>
     {
         /// <summary>
         /// 状态 (停用/启用)
@@ -99,5 +93,29 @@ namespace YaSha.DataManager.FamilyLibs
         /// 层级结构
         /// </summary>
         public string Hierarchy { get; set; }
+
+
+        /// <summary>
+        /// 型号
+        /// </summary>
+        public string Type { get; set; }
+
+        /// <summary>
+        /// 加工方式
+        /// </summary>
+        public string ProcessMode { get; set; }
+
+        /// <summary>
+        /// 备注
+        /// </summary>
+        public string Notes { get; set; }
+
+        /// <summary>
+        /// 备注
+        /// </summary>
+        public string Usage { get; set; }
+
+
+
     }
 }

@@ -37,4 +37,6 @@ public class ProductInventoryEditDto : AuditedEntityDto<Guid>
     public string ModifyUser { get; set; }
 
     public string MaterialUsageFormula { get; set; }
+
+    public string UnitBase { get; set; }
 }

@@ -1,15 +1,7 @@
-﻿using EasyAbp.Abp.Trees;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Dynamic.Core;
-using System.Threading.Tasks;
-using Volo.Abp.Application.Dtos;
-using Volo.Abp.Application.Services;
+﻿using Volo.Abp.Application.Dtos;
 using Volo.Abp.Domain.Repositories;
-using YaSha.DataManager.Common;
-using YaSha.DataManager.FamilyTrees;
+using Volo.Abp.Users;
+using YaSha.DataManager.ProductInventory.Dto;
 
 namespace YaSha.DataManager.FamilyLibs
 {
@@ -18,18 +10,82 @@ namespace YaSha.DataManager.FamilyLibs
            FamilyLib,
            FamilyLibDto,
            Guid,
-           PagedAndSortedResultRequestDto>,
+           PagedAndSortedResultRequestDto,
+           FamilyLibCreateDto>,
        IFamilyLibAppService
     {
-        protected readonly ITreeRepository<FamilyLib> _repository;
-        protected readonly ITreeRepository<FamilyTree> _treeRepository;
-
-        public FamilyLibAppService(ITreeRepository<FamilyLib> repository, ITreeRepository<FamilyTree> treeRepository)
+        protected readonly IRepository<FamilyLib, Guid> _repository;
+        protected readonly IRepository<FamilyTree, Guid> _treeRepository;
+        private readonly ICurrentUser _currentUser;
+        public FamilyLibAppService(IRepository<FamilyLib, Guid> repository, IRepository<FamilyTree, Guid> treeRepository, ICurrentUser currentUser)
             : base(repository)
         {
             _repository = repository;
             _treeRepository = treeRepository;
+            _currentUser = currentUser;
         }
+
+        public async Task<List<FamilyLibDto>> GetLibsAsync()
+        {
+            var libs = await _repository.GetListAsync();
+            return ObjectMapper.Map<List<FamilyLib>, List<FamilyLibDto>>(libs);
+        }
+
+       
+        public async Task DeleteListAsync(List<FamilyLibDto> dtos)
+        {
+            var allFamilyLibs = await _repository.GetListAsync();
+            var entities = new List<FamilyLib>();
+            List<FamilyLib> childs = new List<FamilyLib>();
+
+            foreach (var lib in dtos)
+            {
+                var entity = allFamilyLibs.Find(x => x.Id.Equals(lib.Id));
+                if (entity != null)
+                {
+                    entities.Add(entity);
+                    GetChildren(childs, lib.Id, allFamilyLibs);
+                }
+            }
+            await RecursionDelete(childs);
+            await _repository.DeleteManyAsync(entities, true);
+        }
+
+        public async Task CreateListAsync(List<FamilyLibCreateDto> dtos)
+        {
+            var libs = ObjectMapper.Map<List<FamilyLibCreateDto>, List<FamilyLib>>(dtos);
+            await RecursionAdd(libs);
+        }
+
+        public void GetChildren(List<FamilyLib> childs, Guid guid, List<FamilyLib> allFamilyLibs)
+        {
+            var familyLibs = allFamilyLibs.Where(e => e.ParentId.Equals(guid)).ToList();
+            foreach (var familyLib in familyLibs)
+            {
+                childs.Add(familyLib);
+                GetChildren(childs, familyLib.Id, allFamilyLibs);
+            }
+        }
+
+        public async Task RecursionAdd(List<FamilyLib> libs)
+        {
+            if (libs.Count == 0) return;
+            var parents = libs.Where(e => e.ParentId == null || libs.Find(x => x.Id.Equals(e.ParentId)) == null).ToList();
+            await _repository.InsertManyAsync(parents, true);
+            parents.ForEach(e => libs.Remove(e));
+            await RecursionAdd(libs);
+        }
+
+        public async Task RecursionDelete(List<FamilyLib> libs)
+        {
+            if (libs.Count == 0) return;
+            var childs = libs.Where(e => libs.Find(x => x.ParentId.Equals(e.Id)) == null).ToList();
+            await _repository.DeleteManyAsync(childs, true);
+            childs.ForEach(e => libs.Remove(e));
+            await RecursionDelete(libs);
+        }
+
+
 
 
         public async Task<PagedResultDto<FamilyLibDto>> GetListByIdAsync(OrderNotificationSearchDto input)
@@ -135,10 +191,10 @@ namespace YaSha.DataManager.FamilyLibs
         public async Task<List<FamilyLibDto>> GetSubElemntsGuids(Guid guid)
         {
             List<FamilyLib> subLibs = new List<FamilyLib>();
-
+            var allFamilyLibs = await _repository.GetListAsync();
             var find = await _repository.FindAsync(guid);
 
-            if(find == null)
+            if (find == null)
             {
                 return new List<FamilyLibDto>();
             }
@@ -149,7 +205,7 @@ namespace YaSha.DataManager.FamilyLibs
                 return new List<FamilyLibDto>() { ObjectMapper.Map<FamilyLib, FamilyLibDto>(find) };
             }
 
-            var familyLibs = await _repository.GetChildrenAsync(guid);
+            var familyLibs = allFamilyLibs.Where(e => e.ParentId == guid).ToList();
 
             if (familyLibs.Count > 0)
             {
@@ -159,7 +215,7 @@ namespace YaSha.DataManager.FamilyLibs
             {
                 if (string.IsNullOrEmpty(childrenFamily.Id.ToString()))
                     continue;
-                subLibs.AddRange(await _repository.GetChildrenAsync(childrenFamily.Id));
+                subLibs.AddRange(allFamilyLibs.Where(e => e.ParentId == childrenFamily.Id).ToList());
             }
             subLibs.Add(find);
             var result = ObjectMapper.Map<List<FamilyLib>, List<FamilyLibDto>>(subLibs);
@@ -177,6 +233,50 @@ namespace YaSha.DataManager.FamilyLibs
             }
             return familyLibDtos;
         }
+
+        public async Task<ImageResponseDto> UploadFamilyLibImage(ImageFileDto dto)
+        {
+            var path = "/ServerData/FileManagement/FamilyLib/Revit";
+
+            var imageServerPath = "";
+            try
+            {
+                if (!Directory.Exists(path))
+                {
+                    Directory.CreateDirectory(path);
+                }
+                var name = Guid.NewGuid().ToString() + Path.GetExtension(dto.File.FileName);
+                var imageLocalPath = path + "\\" + name;
+                using (FileStream fileStream = new FileStream(imageLocalPath, FileMode.Create, FileAccess.Write))
+                {
+                    await dto.File.CopyToAsync(fileStream);
+                }
+                imageServerPath = "https://bds.chinayasha.com/bdsfileservice/FamilyLib/Revit/" + name;
+
+                var lib = await _repository.FindAsync(dto.Id);
+
+                if (lib != null)
+                {
+                    lib.ImagePath = imageServerPath;
+                    lib.UploadUser = _currentUser.UserName;
+                    await _repository.UpdateAsync(lib);
+                }
+            }
+            catch (Exception e)
+            {
+                return new ImageResponseDto()
+                {
+                    Code = -1,
+                    Error = e.Message,
+                };
+            }
+
+            return new ImageResponseDto()
+            {
+                Code = 1,
+                ServerPath = imageServerPath,
+            };
+        }
     }
 
     public class FamilyLibUtils
@@ -187,7 +287,7 @@ namespace YaSha.DataManager.FamilyLibs
         /// <param name="repository"></param>
         /// <param name="familyLib"></param>
         /// <returns></returns>
-        public static async Task<FamilyLib> GetTopParent(ITreeRepository<FamilyLib> repository, FamilyLib familyLib)
+        public static async Task<FamilyLib> GetTopParent(IRepository<FamilyLib, Guid> repository, FamilyLib familyLib)
         {
             FamilyLib parentFamily = familyLib;
             if (familyLib == null)

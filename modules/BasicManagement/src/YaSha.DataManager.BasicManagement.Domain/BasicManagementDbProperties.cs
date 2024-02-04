@@ -7,4 +7,6 @@ public static class BasicManagementDbProperties
     public static string DbSchema { get; set; } = null;
 
     public const string ConnectionStringName = "BasicManagement";
+
+
 }

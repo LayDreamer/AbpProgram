@@ -16,9 +16,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Autodesk.Forge" Version="1.9.9" />
     <PackageReference Include="EasyAbp.Abp.Trees.HttpApi" Version="2.11.0" />
-    <PackageReference Include="Newtonsoft.Json" Version="9.0.1" />
+    <PackageReference Include="EPPlus" Version="6.2.9" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="Swashbuckle.AspNetCore.Annotations" />
   </ItemGroup>
+
 
 </Project>

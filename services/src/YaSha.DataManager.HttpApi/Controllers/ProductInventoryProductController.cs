@@ -1,14 +1,14 @@
-﻿using System.Net;
-using System.Text;
+﻿using System.Text;
 using Newtonsoft.Json;
 using Volo.Abp.Application.Dtos;
-using YaSha.DataManager.Common;
 using YaSha.DataManager.ProductInventory;
 using YaSha.DataManager.ProductInventory.Dto;
-using YaSha.DataManager.ProductRetrieval.Dto;
 
 namespace YaSha.DataManager.Controllers;
 
+/// <summary>
+/// 架构清单
+/// </summary>
 [Route("ProductInventoryProduct")]
 public class ProductInventoryProductController : DataManagerController, IProductIventProductAppService
 {
@@ -27,10 +27,10 @@ public class ProductInventoryProductController : DataManagerController, IProduct
     }
 
     [HttpPost("ImportFromExcel")]
-    public async Task<List<ProductInventoryProductDto>> ImportProductFromExcel(string system, string series,
+    public async Task<List<ProductInventoryProductDto>> ImportProductFromExcel(string system, string series, string seriesRemark,
         List<ProductInventoryProductCreateDto> dtos)
     {
-        return await _service.ImportProductFromExcel(system, series, dtos);
+        return await _service.ImportProductFromExcel(system, series, seriesRemark, dtos);
     }
 
     [HttpPost("AddProduct")]
@@ -68,8 +68,8 @@ public class ProductInventoryProductController : DataManagerController, IProduct
     {
         return await _service.PublishProducts(dto);
     }
-    
-    
+
+
     [HttpPost("PageProducts")]
     public async Task<PagedResultDto<ProductInventoryProductDto>> PageProducts(OrderNotificationSearchDto input)
     {
@@ -83,77 +83,20 @@ public class ProductInventoryProductController : DataManagerController, IProduct
     }
 
     [HttpPost("ErpGetToken")]
-    public async Task<string> GetErpTkenAsync()
+    public async Task<string> GetErpTokenAsync()
     {
-        const string url = "https://ysapi.chinayasha.com/imtech-oauth-server/publicapi/getAccessToken";
-        const string postData = @"{
-            ""grant_type"": ""client_credentials"",
-            ""client_id"": ""17ec5b3e-fb90-11ed-8b51-c8e265121212"",
-            ""client_secret"": ""17ec5b3e-fb90-11ed-8b51-c8e265121212""
-        }";
-        using var client = new HttpClient();
-        client.DefaultRequestHeaders.Add("charset", "utf-8");
-        HttpContent content = new StringContent(postData, Encoding.UTF8, "application/json");
-        var response = await client.PostAsync(url, content);
-        var responseText = await response.Content.ReadAsStringAsync();
-        dynamic jsonResponse = JsonConvert.DeserializeObject(responseText);
-        string accessToken = jsonResponse.data.access_token;
-        return accessToken;
+        return await _service.GetErpTokenAsync();
     }
 
     [HttpPost("ErpGetProduct")]
     public async Task<List<ProductInventoryEditDto>> GetErpData(string accessToken, string postData)
     {
-        const string url = "https://erp.chinayasha.com/yasha-erp-web/sysopenapi/bimApi";
-        const string clientId = "17ec5b3e-fb90-11ed-8b51-c8e265121212";
-        using var client = new HttpClient();
-        var fullUrl = $"{url}?access_token={accessToken}&client_id={clientId}";
-        HttpContent content = new StringContent(postData, Encoding.UTF8, "application/json");
-        var response = await client.PostAsync(fullUrl, content);
-        var responseText = await response.Content.ReadAsStringAsync();
-        dynamic jsonResponse = JsonConvert.DeserializeObject(responseText);
-        var results = new List<ProductInventoryEditDto>();
-        foreach (var item in jsonResponse.data)
-        {
-            if ((string)item["status"] != "1") continue;
-            var obj = new ProductInventoryEditDto();
-            var productCode = (string)item["productNo"];
-            var materialCode = (string)item["materialNo"];
-            obj.Code = !string.IsNullOrEmpty(productCode) ? productCode : !string.IsNullOrEmpty(materialCode) ? materialCode : "";
-            var productName = (string)item["productName"];
-            var materialName = (string)item["materialName"];
-            obj.Name = !string.IsNullOrEmpty(productName) ? productName : !string.IsNullOrEmpty(materialName) ? materialName : "";
-            var productLength = (string)item["length"];
-            var materialLength = (string)item["longth"];
-            obj.Length = !string.IsNullOrEmpty(productLength) ? productLength : !string.IsNullOrEmpty(materialLength) ? materialLength : "";
-            var width = (string)item["width"];
-            obj.Width = !string.IsNullOrEmpty(width) ? width : "";
-            var productHeight = (string)item["high"];
-            var materialHeight = (string)item["height"];
-            obj.Height = !string.IsNullOrEmpty(productHeight) ? productHeight : !string.IsNullOrEmpty(materialHeight) ? materialHeight : "";
-            var color = (string)item["color"];
-            obj.Color = !string.IsNullOrEmpty(color) ? color : "";
-            var series = (string)item["series"];
-            
-            obj.Series = !string.IsNullOrEmpty(series) ? 
-                DataManagerDomainSharedConsts.ProductInventorySeriesDictionary.TryGetValue(series, out var value) 
-                    ? value : series : "";
-            var system = (string)item["classificationName"];
-            obj.System = !string.IsNullOrEmpty(system)
-                ? system
-                : DataManagerDomainSharedConsts.ProductInventorySystemDictionary
-                    .FirstOrDefault(x => obj.Code.Contains(x.Key)).Value ?? "";
+        return await _service.GetErpData(accessToken, postData);
+    }
 
-            var material = (string)item["basisMaterial"];
-            obj.MaterialQuality = !string.IsNullOrEmpty(material) ? material : 
-                (!string.IsNullOrEmpty((string)item["materialOne"])?(string)item["materialOne"]:"")+
-                 (!string.IsNullOrEmpty((string)item["materialTwo"])?(string)item["materialTwo"]:"")+ 
-                  (!string.IsNullOrEmpty((string)item["materialThree"])?(string)item["materialThree"]:"");
-            results.Add(obj);
-            var unit = (string)item["unitPurchase1"];
-            obj.Unit = !string.IsNullOrEmpty(unit) ? unit : "";
-        }
-
-        return results;
+    [HttpPost("UploadProductImage")]
+    public async Task<ImageResponseDto> UploadProductImage([FromForm] ImageFileDto dto)
+    {
+        return await _service.UploadProductImage(dto);
     }
 }

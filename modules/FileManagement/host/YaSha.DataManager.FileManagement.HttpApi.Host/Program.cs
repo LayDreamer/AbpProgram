@@ -12,7 +12,7 @@ public class Program
         return Host.CreateDefaultBuilder(args)
             .ConfigureWebHostDefaults(webBuilder =>
             {
-                webBuilder.ConfigureKestrel((context, options) => { options.Limits.MaxRequestBodySize = 1024 * 50; });
+                webBuilder.ConfigureKestrel((context, options) => { options.Limits.MaxRequestBodySize = 1024 * 1024 * 50; });
                 webBuilder.UseStartup<Startup>();
             })
             .UseSerilog().UseAutofac();

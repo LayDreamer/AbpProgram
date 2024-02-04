@@ -18,7 +18,7 @@ namespace YaSha.DataManager.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("_Abp_DatabaseProvider", EfCoreDatabaseProvider.MySql)
-                .HasAnnotation("ProductVersion", "7.0.2")
+                .HasAnnotation("ProductVersion", "7.0.5")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
             modelBuilder.Entity("Volo.Abp.AuditLogging.AuditLog", b =>
@@ -1320,6 +1320,408 @@ namespace YaSha.DataManager.Migrations
                     b.ToTable("AbpTenantConnectionStrings", (string)null);
                 });
 
+            modelBuilder.Entity("YaSha.DataManager.ArchitectureList.AggregateRoot.ArchitectureListFile", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("char(36)");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasMaxLength(40)
+                        .HasColumnType("varchar(40)")
+                        .HasColumnName("ConcurrencyStamp");
+
+                    b.Property<DateTime>("CreationTime")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("CreationTime");
+
+                    b.Property<Guid?>("CreatorId")
+                        .HasColumnType("char(36)")
+                        .HasColumnName("CreatorId");
+
+                    b.Property<string>("Data")
+                        .HasColumnType("longtext");
+
+                    b.Property<Guid?>("DeleterId")
+                        .HasColumnType("char(36)")
+                        .HasColumnName("DeleterId");
+
+                    b.Property<DateTime?>("DeletionTime")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("DeletionTime");
+
+                    b.Property<string>("ExtraProperties")
+                        .HasColumnType("longtext")
+                        .HasColumnName("ExtraProperties");
+
+                    b.Property<string>("FileEncryptionPath")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("FileName")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("FilePath")
+                        .HasColumnType("longtext");
+
+                    b.Property<bool>("IsDeleted")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("tinyint(1)")
+                        .HasDefaultValue(false)
+                        .HasColumnName("IsDeleted");
+
+                    b.Property<DateTime?>("LastModificationTime")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("LastModificationTime");
+
+                    b.Property<Guid?>("LastModifierId")
+                        .HasColumnType("char(36)")
+                        .HasColumnName("LastModifierId");
+
+                    b.Property<Guid>("TreeId")
+                        .HasColumnType("char(36)");
+
+                    b.Property<int>("Type")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("TreeId");
+
+                    b.ToTable("AppArchitectureListFile", (string)null);
+                });
+
+            modelBuilder.Entity("YaSha.DataManager.ArchitectureList.AggregateRoot.ArchitectureListMaterial", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("char(36)");
+
+                    b.Property<string>("BasicPerformance")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Code")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Composition")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasMaxLength(40)
+                        .HasColumnType("varchar(40)")
+                        .HasColumnName("ConcurrencyStamp");
+
+                    b.Property<DateTime>("CreationTime")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("CreationTime");
+
+                    b.Property<Guid?>("CreatorId")
+                        .HasColumnType("char(36)")
+                        .HasColumnName("CreatorId");
+
+                    b.Property<Guid?>("DeleterId")
+                        .HasColumnType("char(36)")
+                        .HasColumnName("DeleterId");
+
+                    b.Property<DateTime?>("DeletionTime")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("DeletionTime");
+
+                    b.Property<string>("ExtraProperties")
+                        .HasColumnType("longtext")
+                        .HasColumnName("ExtraProperties");
+
+                    b.Property<string>("Height")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("InstallationCode")
+                        .HasColumnType("longtext");
+
+                    b.Property<bool>("IsDeleted")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("tinyint(1)")
+                        .HasDefaultValue(false)
+                        .HasColumnName("IsDeleted");
+
+                    b.Property<string>("IsProcess")
+                        .HasColumnType("longtext");
+
+                    b.Property<DateTime?>("LastModificationTime")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("LastModificationTime");
+
+                    b.Property<Guid?>("LastModifierId")
+                        .HasColumnType("char(36)")
+                        .HasColumnName("LastModifierId");
+
+                    b.Property<string>("Length")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("MaterialQuality")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("OptionalSerial")
+                        .HasColumnType("longtext");
+
+                    b.Property<Guid>("ParentId")
+                        .HasColumnType("char(36)");
+
+                    b.Property<string>("Remark")
+                        .HasColumnType("longtext");
+
+                    b.Property<int>("Tag")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Unit")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Usage")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Width")
+                        .HasColumnType("longtext");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ParentId");
+
+                    b.ToTable("AppArchitectureListMaterial", (string)null);
+                });
+
+            modelBuilder.Entity("YaSha.DataManager.ArchitectureList.AggregateRoot.ArchitectureListModule", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("char(36)");
+
+                    b.Property<string>("AssemblyDrawingNum")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Category")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasMaxLength(40)
+                        .HasColumnType("varchar(40)")
+                        .HasColumnName("ConcurrencyStamp");
+
+                    b.Property<string>("CreateUser")
+                        .HasColumnType("longtext");
+
+                    b.Property<DateTime>("CreationTime")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("CreationTime");
+
+                    b.Property<Guid?>("CreatorId")
+                        .HasColumnType("char(36)")
+                        .HasColumnName("CreatorId");
+
+                    b.Property<Guid?>("DeleterId")
+                        .HasColumnType("char(36)")
+                        .HasColumnName("DeleterId");
+
+                    b.Property<DateTime?>("DeletionTime")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("DeletionTime");
+
+                    b.Property<string>("DetailNum")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("ExtraProperties")
+                        .HasColumnType("longtext")
+                        .HasColumnName("ExtraProperties");
+
+                    b.Property<string>("Height")
+                        .HasColumnType("longtext");
+
+                    b.Property<bool>("IsDeleted")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("tinyint(1)")
+                        .HasDefaultValue(false)
+                        .HasColumnName("IsDeleted");
+
+                    b.Property<bool>("IsProcessing")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<DateTime?>("LastModificationTime")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("LastModificationTime");
+
+                    b.Property<Guid?>("LastModifierId")
+                        .HasColumnType("char(36)")
+                        .HasColumnName("LastModifierId");
+
+                    b.Property<string>("Length")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Model")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("ModifyUser")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("ModuleSpecification")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Optional")
+                        .HasColumnType("longtext");
+
+                    b.Property<Guid>("ParentId")
+                        .HasColumnType("char(36)");
+
+                    b.Property<string>("Path")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("ProcessNum")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("ProcessingCode")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("ProcessingMode")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Remark")
+                        .HasColumnType("longtext");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.Property<string>("SupplyMode")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("System")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Unit")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Width")
+                        .HasColumnType("longtext");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ParentId");
+
+                    b.ToTable("AppArchitectureListModule", (string)null);
+                });
+
+            modelBuilder.Entity("YaSha.DataManager.ArchitectureList.AggregateRoot.ArchitectureListModuleFile", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("char(36)");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasMaxLength(40)
+                        .HasColumnType("varchar(40)")
+                        .HasColumnName("ConcurrencyStamp");
+
+                    b.Property<DateTime>("CreationTime")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("CreationTime");
+
+                    b.Property<Guid?>("CreatorId")
+                        .HasColumnType("char(36)")
+                        .HasColumnName("CreatorId");
+
+                    b.Property<string>("Data")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("ExtraProperties")
+                        .HasColumnType("longtext")
+                        .HasColumnName("ExtraProperties");
+
+                    b.Property<Guid>("FileId")
+                        .HasColumnType("char(36)");
+
+                    b.Property<DateTime?>("LastModificationTime")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("LastModificationTime");
+
+                    b.Property<Guid?>("LastModifierId")
+                        .HasColumnType("char(36)")
+                        .HasColumnName("LastModifierId");
+
+                    b.Property<Guid>("ModuleId")
+                        .HasColumnType("char(36)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("FileId");
+
+                    b.ToTable("AppArchitectureListModuleFile", (string)null);
+                });
+
+            modelBuilder.Entity("YaSha.DataManager.ArchitectureList.AggregateRoot.ArchitectureListTree", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("char(36)");
+
+                    b.Property<int>("Code")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasMaxLength(40)
+                        .HasColumnType("varchar(40)")
+                        .HasColumnName("ConcurrencyStamp");
+
+                    b.Property<DateTime>("CreationTime")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("CreationTime");
+
+                    b.Property<Guid?>("CreatorId")
+                        .HasColumnType("char(36)")
+                        .HasColumnName("CreatorId");
+
+                    b.Property<string>("Data")
+                        .HasColumnType("longtext");
+
+                    b.Property<Guid?>("DeleterId")
+                        .HasColumnType("char(36)")
+                        .HasColumnName("DeleterId");
+
+                    b.Property<DateTime?>("DeletionTime")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("DeletionTime");
+
+                    b.Property<string>("ExtraProperties")
+                        .HasColumnType("longtext")
+                        .HasColumnName("ExtraProperties");
+
+                    b.Property<bool>("IsDeleted")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("tinyint(1)")
+                        .HasDefaultValue(false)
+                        .HasColumnName("IsDeleted");
+
+                    b.Property<DateTime?>("LastModificationTime")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("LastModificationTime");
+
+                    b.Property<Guid?>("LastModifierId")
+                        .HasColumnType("char(36)")
+                        .HasColumnName("LastModifierId");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("longtext");
+
+                    b.Property<Guid?>("ParentId")
+                        .HasColumnType("char(36)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ParentId");
+
+                    b.ToTable("AppArchitectureListTree", (string)null);
+                });
+
             modelBuilder.Entity("YaSha.DataManager.DataDictionaryManagement.DataDictionaries.Aggregates.DataDictionary", b =>
                 {
                     b.Property<Guid>("Id")
@@ -1435,6 +1837,50 @@ namespace YaSha.DataManager.Migrations
                     b.ToTable("AbpDataDictionaryDetails", (string)null);
                 });
 
+            modelBuilder.Entity("YaSha.DataManager.Domain.DomainUser", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("char(36)");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasMaxLength(40)
+                        .HasColumnType("varchar(40)")
+                        .HasColumnName("ConcurrencyStamp");
+
+                    b.Property<DateTime>("CreationTime")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("CreationTime");
+
+                    b.Property<Guid?>("CreatorId")
+                        .HasColumnType("char(36)")
+                        .HasColumnName("CreatorId");
+
+                    b.Property<string>("ExtraProperties")
+                        .HasColumnType("longtext")
+                        .HasColumnName("ExtraProperties");
+
+                    b.Property<bool>("IsDomain")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<DateTime?>("LastModificationTime")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("LastModificationTime");
+
+                    b.Property<Guid?>("LastModifierId")
+                        .HasColumnType("char(36)")
+                        .HasColumnName("LastModifierId");
+
+                    b.Property<string>("UserName")
+                        .IsRequired()
+                        .HasMaxLength(128)
+                        .HasColumnType("varchar(128)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("AbpDomainUsers", (string)null);
+                });
+
             modelBuilder.Entity("YaSha.DataManager.FamilyLibs.FamilyLib", b =>
                 {
                     b.Property<Guid>("Id")
@@ -1501,19 +1947,31 @@ namespace YaSha.DataManager.Migrations
                     b.Property<int>("Level")
                         .HasColumnType("int");
 
+                    b.Property<string>("Notes")
+                        .HasColumnType("longtext");
+
                     b.Property<string>("Number")
                         .HasColumnType("longtext");
 
                     b.Property<Guid?>("ParentId")
                         .HasColumnType("char(36)");
 
+                    b.Property<string>("ProcessMode")
+                        .HasColumnType("longtext");
+
                     b.Property<string>("Status")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Type")
                         .HasColumnType("longtext");
 
                     b.Property<string>("Unit")
                         .HasColumnType("longtext");
 
                     b.Property<string>("UploadUser")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Usage")
                         .HasColumnType("longtext");
 
                     b.Property<string>("Version")
@@ -1529,7 +1987,7 @@ namespace YaSha.DataManager.Migrations
                     b.ToTable("AppFamilyLibs", (string)null);
                 });
 
-            modelBuilder.Entity("YaSha.DataManager.FamilyTrees.FamilyTree", b =>
+            modelBuilder.Entity("YaSha.DataManager.FamilyLibs.FamilyTree", b =>
                 {
                     b.Property<Guid>("Id")
                         .HasColumnType("char(36)");
@@ -1743,6 +2201,376 @@ namespace YaSha.DataManager.Migrations
                     b.ToTable("AbpLanguages", (string)null);
                 });
 
+            modelBuilder.Entity("YaSha.DataManager.ListProcessing.ListProcessing", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("char(36)");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasMaxLength(40)
+                        .HasColumnType("varchar(40)")
+                        .HasColumnName("ConcurrencyStamp");
+
+                    b.Property<DateTime>("CreationTime")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("CreationTime");
+
+                    b.Property<Guid?>("CreatorId")
+                        .HasColumnType("char(36)")
+                        .HasColumnName("CreatorId");
+
+                    b.Property<string>("ExtraProperties")
+                        .HasColumnType("longtext")
+                        .HasColumnName("ExtraProperties");
+
+                    b.Property<string>("FilePath")
+                        .HasColumnType("longtext");
+
+                    b.Property<DateTime?>("LastModificationTime")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("LastModificationTime");
+
+                    b.Property<Guid?>("LastModifierId")
+                        .HasColumnType("char(36)")
+                        .HasColumnName("LastModifierId");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("longtext");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("AppListProcessing", (string)null);
+                });
+
+            modelBuilder.Entity("YaSha.DataManager.MaterialManage.AggregateRoot.MaterialManageInfo", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("char(36)");
+
+                    b.Property<string>("BaiduSign")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasMaxLength(40)
+                        .HasColumnType("varchar(40)")
+                        .HasColumnName("ConcurrencyStamp");
+
+                    b.Property<DateTime>("CreationTime")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("CreationTime");
+
+                    b.Property<Guid?>("CreatorId")
+                        .HasColumnType("char(36)")
+                        .HasColumnName("CreatorId");
+
+                    b.Property<Guid?>("DeleterId")
+                        .HasColumnType("char(36)")
+                        .HasColumnName("DeleterId");
+
+                    b.Property<DateTime?>("DeletionTime")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("DeletionTime");
+
+                    b.Property<string>("DeliveryCycle")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("ExtraProperties")
+                        .HasColumnType("longtext")
+                        .HasColumnName("ExtraProperties");
+
+                    b.Property<bool>("IsDeleted")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("tinyint(1)")
+                        .HasDefaultValue(false)
+                        .HasColumnName("IsDeleted");
+
+                    b.Property<DateTime?>("LastModificationTime")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("LastModificationTime");
+
+                    b.Property<Guid?>("LastModifierId")
+                        .HasColumnType("char(36)")
+                        .HasColumnName("LastModifierId");
+
+                    b.Property<string>("Length")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("MaterialImageDownLoadUrl")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("MaterialImageUrl")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("MaterialSurface")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("MaterialTexture")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("MaterialType")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("OperatingUser")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Price")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Quantity")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("SequenceCode")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("SeriesCode")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("SeriesImageUrl")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("SeriesName")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Status")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("StoragePlace")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Supplier")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("SupplierCode")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("SupplierOverview")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Thickness")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Weight")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Width")
+                        .HasColumnType("longtext");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("AppMaterialManageInfo", (string)null);
+                });
+
+            modelBuilder.Entity("YaSha.DataManager.MeasuringExcels.MeasuringExcel", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("char(36)");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasMaxLength(40)
+                        .HasColumnType("varchar(40)")
+                        .HasColumnName("ConcurrencyStamp");
+
+                    b.Property<DateTime>("CreationTime")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("CreationTime");
+
+                    b.Property<string>("Creator")
+                        .HasColumnType("longtext");
+
+                    b.Property<Guid?>("CreatorId")
+                        .HasColumnType("char(36)")
+                        .HasColumnName("CreatorId");
+
+                    b.Property<string>("ExtraProperties")
+                        .HasColumnType("longtext")
+                        .HasColumnName("ExtraProperties");
+
+                    b.Property<string>("FileAddress")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("FileName")
+                        .HasColumnType("longtext");
+
+                    b.Property<DateTime?>("LastModificationTime")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("LastModificationTime");
+
+                    b.Property<Guid?>("LastModifierId")
+                        .HasColumnType("char(36)")
+                        .HasColumnName("LastModifierId");
+
+                    b.Property<string>("designDiffer")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("minCavityValue")
+                        .HasColumnType("longtext");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("AppMeasuringExcels", (string)null);
+                });
+
+            modelBuilder.Entity("YaSha.DataManager.NewFamilyLibrary.NewFamilyLib", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("char(36)");
+
+                    b.Property<Guid>("CategoryId")
+                        .HasColumnType("char(36)");
+
+                    b.Property<string>("Code")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasMaxLength(40)
+                        .HasColumnType("varchar(40)")
+                        .HasColumnName("ConcurrencyStamp");
+
+                    b.Property<DateTime>("CreationTime")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("CreationTime");
+
+                    b.Property<Guid?>("CreatorId")
+                        .HasColumnType("char(36)")
+                        .HasColumnName("CreatorId");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("DisplayName")
+                        .IsRequired()
+                        .HasMaxLength(128)
+                        .HasColumnType("varchar(128)");
+
+                    b.Property<string>("ExternalData")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("ExtraProperties")
+                        .HasColumnType("longtext")
+                        .HasColumnName("ExtraProperties");
+
+                    b.Property<string>("FilePath")
+                        .HasColumnType("longtext");
+
+                    b.Property<double>("Height")
+                        .HasColumnType("double");
+
+                    b.Property<string>("Hierarchy")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("ImagePath")
+                        .HasColumnType("longtext");
+
+                    b.Property<DateTime?>("LastModificationTime")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("LastModificationTime");
+
+                    b.Property<Guid?>("LastModifierId")
+                        .HasColumnType("char(36)")
+                        .HasColumnName("LastModifierId");
+
+                    b.Property<double>("Length")
+                        .HasColumnType("double");
+
+                    b.Property<int>("Level")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Notes")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Number")
+                        .HasColumnType("longtext");
+
+                    b.Property<Guid?>("ParentId")
+                        .HasColumnType("char(36)");
+
+                    b.Property<string>("ProcessMode")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Status")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Type")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Unit")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("UploadUser")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Usage")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Version")
+                        .HasColumnType("longtext");
+
+                    b.Property<double>("Width")
+                        .HasColumnType("double");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ParentId");
+
+                    b.ToTable("AppNewFamilyLib", (string)null);
+                });
+
+            modelBuilder.Entity("YaSha.DataManager.NewFamilyLibrary.NewFamilyTree", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("char(36)");
+
+                    b.Property<string>("Code")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasMaxLength(40)
+                        .HasColumnType("varchar(40)")
+                        .HasColumnName("ConcurrencyStamp");
+
+                    b.Property<DateTime>("CreationTime")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("CreationTime");
+
+                    b.Property<Guid?>("CreatorId")
+                        .HasColumnType("char(36)")
+                        .HasColumnName("CreatorId");
+
+                    b.Property<string>("DisplayName")
+                        .IsRequired()
+                        .HasMaxLength(128)
+                        .HasColumnType("varchar(128)");
+
+                    b.Property<string>("ExtraProperties")
+                        .HasColumnType("longtext")
+                        .HasColumnName("ExtraProperties");
+
+                    b.Property<DateTime?>("LastModificationTime")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("LastModificationTime");
+
+                    b.Property<Guid?>("LastModifierId")
+                        .HasColumnType("char(36)")
+                        .HasColumnName("LastModifierId");
+
+                    b.Property<int>("Level")
+                        .HasColumnType("int");
+
+                    b.Property<Guid?>("ParentId")
+                        .HasColumnType("char(36)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ParentId");
+
+                    b.ToTable("AppNewFamilyTree", (string)null);
+                });
+
             modelBuilder.Entity("YaSha.DataManager.NotificationManagement.Notifications.Aggregates.Notification", b =>
                 {
                     b.Property<Guid>("Id")
@@ -1866,6 +2694,153 @@ namespace YaSha.DataManager.Migrations
                     b.ToTable("AbpNotificationSubscriptions", (string)null);
                 });
 
+            modelBuilder.Entity("YaSha.DataManager.ProcessingLists.ProcessingData", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("char(36)");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasMaxLength(40)
+                        .HasColumnType("varchar(40)")
+                        .HasColumnName("ConcurrencyStamp");
+
+                    b.Property<DateTime>("CreationTime")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("CreationTime");
+
+                    b.Property<Guid?>("CreatorId")
+                        .HasColumnType("char(36)")
+                        .HasColumnName("CreatorId");
+
+                    b.Property<string>("Data")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("ExtraProperties")
+                        .HasColumnType("longtext")
+                        .HasColumnName("ExtraProperties");
+
+                    b.Property<Guid?>("FileId")
+                        .HasColumnType("char(36)");
+
+                    b.Property<DateTime?>("LastModificationTime")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("LastModificationTime");
+
+                    b.Property<Guid?>("LastModifierId")
+                        .HasColumnType("char(36)")
+                        .HasColumnName("LastModifierId");
+
+                    b.Property<string>("MaterialCode")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("MaterialHeight")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("MaterialLength")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("MaterialName")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("MaterialUnit")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("MaterialWidth")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("ModuleCode")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("ModuleHeight")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("ModuleLength")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("ModuleName")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("ModuleWidth")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("ProductCode")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("ProductHeight")
+                        .HasColumnType("longtext");
+
+                    b.Property<Guid?>("ProductId")
+                        .HasColumnType("char(36)");
+
+                    b.Property<string>("ProductLength")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("ProductName")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("ProductWidth")
+                        .HasColumnType("longtext");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("AppProcessingDatas", (string)null);
+                });
+
+            modelBuilder.Entity("YaSha.DataManager.ProcessingLists.ProcessingList", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("char(36)");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasMaxLength(40)
+                        .HasColumnType("varchar(40)")
+                        .HasColumnName("ConcurrencyStamp");
+
+                    b.Property<DateTime>("CreationTime")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("CreationTime");
+
+                    b.Property<string>("Creator")
+                        .HasColumnType("longtext");
+
+                    b.Property<Guid?>("CreatorId")
+                        .HasColumnType("char(36)")
+                        .HasColumnName("CreatorId");
+
+                    b.Property<string>("ExtraProperties")
+                        .HasColumnType("longtext")
+                        .HasColumnName("ExtraProperties");
+
+                    b.Property<string>("FileAddress")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("FileCode")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("FileName")
+                        .HasColumnType("longtext");
+
+                    b.Property<DateTime?>("LastModificationTime")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("LastModificationTime");
+
+                    b.Property<Guid?>("LastModifierId")
+                        .HasColumnType("char(36)")
+                        .HasColumnName("LastModifierId");
+
+                    b.Property<string>("ProjectCode")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("ProjectName")
+                        .HasColumnType("longtext");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("AppProcessingLists", (string)null);
+                });
+
             modelBuilder.Entity("YaSha.DataManager.ProductInventory.AggregateRoot.ProductInventMaterial", b =>
                 {
                     b.Property<Guid>("Id")
@@ -1924,6 +2899,9 @@ namespace YaSha.DataManager.Migrations
                         .HasColumnName("LastModifierId");
 
                     b.Property<string>("Length")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Level")
                         .HasColumnType("longtext");
 
                     b.Property<string>("MaterialQuality")
@@ -2123,6 +3101,9 @@ namespace YaSha.DataManager.Migrations
                     b.Property<string>("Height")
                         .HasColumnType("longtext");
 
+                    b.Property<string>("ImagePath")
+                        .HasColumnType("longtext");
+
                     b.Property<bool>("IsDeleted")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("tinyint(1)")
@@ -2253,6 +3234,358 @@ namespace YaSha.DataManager.Migrations
                     b.ToTable("AppProductInventTree", (string)null);
                 });
 
+            modelBuilder.Entity("YaSha.DataManager.ProductRetrieval.AggregateRoot.MaterialInventory", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("char(36)");
+
+                    b.Property<string>("BillMaterialsCode")
+                        .HasColumnType("longtext");
+
+                    b.Property<DateTime>("CreationTime")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<double>("InventoryAmount")
+                        .HasColumnType("double");
+
+                    b.Property<double>("InventoryQuantity")
+                        .HasColumnType("double");
+
+                    b.Property<string>("MaterialCode")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("MaterialName")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("ProductionBatch")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("ProjectName")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("StorageTime")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Unit")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Warehouse")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("WarehouseLocationName")
+                        .HasColumnType("longtext");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("AppMaterialInventoryInfo", (string)null);
+                });
+
+            modelBuilder.Entity("YaSha.DataManager.ProductRetrieval.AggregateRoot.ProjectInfo", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("char(36)");
+
+                    b.Property<DateTime>("CreationTime")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("MaterialCode")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("ModuleCode")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("ProductCode")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("ProjectCode")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("ProjectName")
+                        .HasColumnType("longtext");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("AppProjectInfo", (string)null);
+                });
+
+            modelBuilder.Entity("YaSha.DataManager.SaleOderList.SaleOder", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("char(36)");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasMaxLength(40)
+                        .HasColumnType("varchar(40)")
+                        .HasColumnName("ConcurrencyStamp");
+
+                    b.Property<DateTime>("CreationTime")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("CreationTime");
+
+                    b.Property<Guid?>("CreatorId")
+                        .HasColumnType("char(36)")
+                        .HasColumnName("CreatorId");
+
+                    b.Property<string>("ExtraProperties")
+                        .HasColumnType("longtext")
+                        .HasColumnName("ExtraProperties");
+
+                    b.Property<string>("FilePath")
+                        .HasColumnType("longtext");
+
+                    b.Property<DateTime?>("LastModificationTime")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("LastModificationTime");
+
+                    b.Property<Guid?>("LastModifierId")
+                        .HasColumnType("char(36)")
+                        .HasColumnName("LastModifierId");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("UploadUser")
+                        .HasColumnType("longtext");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("AppSaleOder", (string)null);
+                });
+
+            modelBuilder.Entity("YaSha.DataManager.StandardAndPolicy.AggregateRoot.StandardAndPolicyCollect", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("char(36)");
+
+                    b.Property<bool>("Collect")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasMaxLength(40)
+                        .HasColumnType("varchar(40)")
+                        .HasColumnName("ConcurrencyStamp");
+
+                    b.Property<DateTime>("CreationTime")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("CreationTime");
+
+                    b.Property<Guid?>("CreatorId")
+                        .HasColumnType("char(36)")
+                        .HasColumnName("CreatorId");
+
+                    b.Property<string>("ExtraProperties")
+                        .HasColumnType("longtext")
+                        .HasColumnName("ExtraProperties");
+
+                    b.Property<DateTime?>("LastModificationTime")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("LastModificationTime");
+
+                    b.Property<Guid?>("LastModifierId")
+                        .HasColumnType("char(36)")
+                        .HasColumnName("LastModifierId");
+
+                    b.Property<Guid>("LibId")
+                        .HasColumnType("char(36)");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("char(36)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("AppStandardAndPolicyCollect", (string)null);
+                });
+
+            modelBuilder.Entity("YaSha.DataManager.StandardAndPolicy.AggregateRoot.StandardAndPolicyLib", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("char(36)");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasMaxLength(40)
+                        .HasColumnType("varchar(40)")
+                        .HasColumnName("ConcurrencyStamp");
+
+                    b.Property<DateTime>("CreationTime")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("CreationTime");
+
+                    b.Property<Guid?>("CreatorId")
+                        .HasColumnType("char(36)")
+                        .HasColumnName("CreatorId");
+
+                    b.Property<string>("DispatchFont")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("ExtraProperties")
+                        .HasColumnType("longtext")
+                        .HasColumnName("ExtraProperties");
+
+                    b.Property<string>("ImagePath")
+                        .HasColumnType("longtext");
+
+                    b.Property<DateTime>("ImplementationDate")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("Industry")
+                        .HasColumnType("longtext");
+
+                    b.Property<DateTime?>("LastModificationTime")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("LastModificationTime");
+
+                    b.Property<Guid?>("LastModifierId")
+                        .HasColumnType("char(36)")
+                        .HasColumnName("LastModifierId");
+
+                    b.Property<string>("LinkPath")
+                        .HasColumnType("longtext");
+
+                    b.Property<DateTime>("LoseDate")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Number")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("PdfPath")
+                        .HasColumnType("longtext");
+
+                    b.Property<DateTime>("PublishingDate")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("PublishingUnit")
+                        .HasColumnType("longtext");
+
+                    b.Property<int>("StandardCategory")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Type")
+                        .HasColumnType("longtext");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("AppStandardAndPolicyLib", (string)null);
+                });
+
+            modelBuilder.Entity("YaSha.DataManager.StandardAndPolicy.AggregateRoot.StandardAndPolicyTheme", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("char(36)");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasMaxLength(40)
+                        .HasColumnType("varchar(40)")
+                        .HasColumnName("ConcurrencyStamp");
+
+                    b.Property<DateTime>("CreationTime")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("CreationTime");
+
+                    b.Property<Guid?>("CreatorId")
+                        .HasColumnType("char(36)")
+                        .HasColumnName("CreatorId");
+
+                    b.Property<string>("ExtraProperties")
+                        .HasColumnType("longtext")
+                        .HasColumnName("ExtraProperties");
+
+                    b.Property<DateTime?>("LastModificationTime")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("LastModificationTime");
+
+                    b.Property<Guid?>("LastModifierId")
+                        .HasColumnType("char(36)")
+                        .HasColumnName("LastModifierId");
+
+                    b.Property<Guid>("LibId")
+                        .HasColumnType("char(36)");
+
+                    b.Property<Guid>("TreeId")
+                        .HasColumnType("char(36)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("LibId");
+
+                    b.HasIndex("TreeId");
+
+                    b.ToTable("AppStandardAndPolicyTheme", (string)null);
+                });
+
+            modelBuilder.Entity("YaSha.DataManager.StandardAndPolicy.AggregateRoot.StandardAndPolicyTree", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("char(36)");
+
+                    b.Property<int>("Code")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasMaxLength(40)
+                        .HasColumnType("varchar(40)")
+                        .HasColumnName("ConcurrencyStamp");
+
+                    b.Property<DateTime>("CreationTime")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("CreationTime");
+
+                    b.Property<Guid?>("CreatorId")
+                        .HasColumnType("char(36)")
+                        .HasColumnName("CreatorId");
+
+                    b.Property<Guid?>("DeleterId")
+                        .HasColumnType("char(36)")
+                        .HasColumnName("DeleterId");
+
+                    b.Property<DateTime?>("DeletionTime")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("DeletionTime");
+
+                    b.Property<string>("ExtraProperties")
+                        .HasColumnType("longtext")
+                        .HasColumnName("ExtraProperties");
+
+                    b.Property<bool>("Hide")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<bool>("IsDeleted")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("tinyint(1)")
+                        .HasDefaultValue(false)
+                        .HasColumnName("IsDeleted");
+
+                    b.Property<DateTime?>("LastModificationTime")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("LastModificationTime");
+
+                    b.Property<Guid?>("LastModifierId")
+                        .HasColumnType("char(36)")
+                        .HasColumnName("LastModifierId");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("longtext");
+
+                    b.Property<Guid?>("ParentId")
+                        .HasColumnType("char(36)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ParentId");
+
+                    b.ToTable("AppStandardAndPolicyTree", (string)null);
+                });
+
             modelBuilder.Entity("Volo.Abp.AuditLogging.AuditLogAction", b =>
                 {
                     b.HasOne("Volo.Abp.AuditLogging.AuditLog", null)
@@ -2377,6 +3710,59 @@ namespace YaSha.DataManager.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("YaSha.DataManager.ArchitectureList.AggregateRoot.ArchitectureListFile", b =>
+                {
+                    b.HasOne("YaSha.DataManager.ArchitectureList.AggregateRoot.ArchitectureListTree", "Tree")
+                        .WithMany()
+                        .HasForeignKey("TreeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Tree");
+                });
+
+            modelBuilder.Entity("YaSha.DataManager.ArchitectureList.AggregateRoot.ArchitectureListMaterial", b =>
+                {
+                    b.HasOne("YaSha.DataManager.ArchitectureList.AggregateRoot.ArchitectureListModule", "Parent")
+                        .WithMany("Materials")
+                        .HasForeignKey("ParentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Parent");
+                });
+
+            modelBuilder.Entity("YaSha.DataManager.ArchitectureList.AggregateRoot.ArchitectureListModule", b =>
+                {
+                    b.HasOne("YaSha.DataManager.ArchitectureList.AggregateRoot.ArchitectureListTree", "Parent")
+                        .WithMany()
+                        .HasForeignKey("ParentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Parent");
+                });
+
+            modelBuilder.Entity("YaSha.DataManager.ArchitectureList.AggregateRoot.ArchitectureListModuleFile", b =>
+                {
+                    b.HasOne("YaSha.DataManager.ArchitectureList.AggregateRoot.ArchitectureListFile", "File")
+                        .WithMany()
+                        .HasForeignKey("FileId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("File");
+                });
+
+            modelBuilder.Entity("YaSha.DataManager.ArchitectureList.AggregateRoot.ArchitectureListTree", b =>
+                {
+                    b.HasOne("YaSha.DataManager.ArchitectureList.AggregateRoot.ArchitectureListTree", "Parent")
+                        .WithMany("Children")
+                        .HasForeignKey("ParentId");
+
+                    b.Navigation("Parent");
+                });
+
             modelBuilder.Entity("YaSha.DataManager.DataDictionaryManagement.DataDictionaries.Aggregates.DataDictionaryDetail", b =>
                 {
                     b.HasOne("YaSha.DataManager.DataDictionaryManagement.DataDictionaries.Aggregates.DataDictionary", null)
@@ -2395,9 +3781,27 @@ namespace YaSha.DataManager.Migrations
                     b.Navigation("Parent");
                 });
 
-            modelBuilder.Entity("YaSha.DataManager.FamilyTrees.FamilyTree", b =>
+            modelBuilder.Entity("YaSha.DataManager.FamilyLibs.FamilyTree", b =>
                 {
-                    b.HasOne("YaSha.DataManager.FamilyTrees.FamilyTree", "Parent")
+                    b.HasOne("YaSha.DataManager.FamilyLibs.FamilyTree", "Parent")
+                        .WithMany("Children")
+                        .HasForeignKey("ParentId");
+
+                    b.Navigation("Parent");
+                });
+
+            modelBuilder.Entity("YaSha.DataManager.NewFamilyLibrary.NewFamilyLib", b =>
+                {
+                    b.HasOne("YaSha.DataManager.NewFamilyLibrary.NewFamilyLib", "Parent")
+                        .WithMany("Children")
+                        .HasForeignKey("ParentId");
+
+                    b.Navigation("Parent");
+                });
+
+            modelBuilder.Entity("YaSha.DataManager.NewFamilyLibrary.NewFamilyTree", b =>
+                {
+                    b.HasOne("YaSha.DataManager.NewFamilyLibrary.NewFamilyTree", "Parent")
                         .WithMany("Children")
                         .HasForeignKey("ParentId");
 
@@ -2459,6 +3863,34 @@ namespace YaSha.DataManager.Migrations
                     b.Navigation("Parent");
                 });
 
+            modelBuilder.Entity("YaSha.DataManager.StandardAndPolicy.AggregateRoot.StandardAndPolicyTheme", b =>
+                {
+                    b.HasOne("YaSha.DataManager.StandardAndPolicy.AggregateRoot.StandardAndPolicyLib", "Lib")
+                        .WithMany()
+                        .HasForeignKey("LibId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("YaSha.DataManager.StandardAndPolicy.AggregateRoot.StandardAndPolicyTree", "Tree")
+                        .WithMany()
+                        .HasForeignKey("TreeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Lib");
+
+                    b.Navigation("Tree");
+                });
+
+            modelBuilder.Entity("YaSha.DataManager.StandardAndPolicy.AggregateRoot.StandardAndPolicyTree", b =>
+                {
+                    b.HasOne("YaSha.DataManager.StandardAndPolicy.AggregateRoot.StandardAndPolicyTree", "Parent")
+                        .WithMany("Children")
+                        .HasForeignKey("ParentId");
+
+                    b.Navigation("Parent");
+                });
+
             modelBuilder.Entity("Volo.Abp.AuditLogging.AuditLog", b =>
                 {
                     b.Navigation("Actions");
@@ -2499,6 +3931,16 @@ namespace YaSha.DataManager.Migrations
                     b.Navigation("ConnectionStrings");
                 });
 
+            modelBuilder.Entity("YaSha.DataManager.ArchitectureList.AggregateRoot.ArchitectureListModule", b =>
+                {
+                    b.Navigation("Materials");
+                });
+
+            modelBuilder.Entity("YaSha.DataManager.ArchitectureList.AggregateRoot.ArchitectureListTree", b =>
+                {
+                    b.Navigation("Children");
+                });
+
             modelBuilder.Entity("YaSha.DataManager.DataDictionaryManagement.DataDictionaries.Aggregates.DataDictionary", b =>
                 {
                     b.Navigation("Details");
@@ -2509,7 +3951,17 @@ namespace YaSha.DataManager.Migrations
                     b.Navigation("Children");
                 });
 
-            modelBuilder.Entity("YaSha.DataManager.FamilyTrees.FamilyTree", b =>
+            modelBuilder.Entity("YaSha.DataManager.FamilyLibs.FamilyTree", b =>
+                {
+                    b.Navigation("Children");
+                });
+
+            modelBuilder.Entity("YaSha.DataManager.NewFamilyLibrary.NewFamilyLib", b =>
+                {
+                    b.Navigation("Children");
+                });
+
+            modelBuilder.Entity("YaSha.DataManager.NewFamilyLibrary.NewFamilyTree", b =>
                 {
                     b.Navigation("Children");
                 });
@@ -2536,6 +3988,11 @@ namespace YaSha.DataManager.Migrations
                     b.Navigation("Children");
 
                     b.Navigation("Products");
+                });
+
+            modelBuilder.Entity("YaSha.DataManager.StandardAndPolicy.AggregateRoot.StandardAndPolicyTree", b =>
+                {
+                    b.Navigation("Children");
                 });
 #pragma warning restore 612, 618
         }

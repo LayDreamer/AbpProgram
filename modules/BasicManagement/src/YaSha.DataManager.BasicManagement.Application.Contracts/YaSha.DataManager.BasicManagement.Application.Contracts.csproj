@@ -5,7 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Magicodes.IE.Excel" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" />
     <PackageReference Include="Volo.Abp.AspNetCore.Mvc.Contracts" />
     <PackageReference Include="Volo.Abp.Ddd.Application.Contracts" />

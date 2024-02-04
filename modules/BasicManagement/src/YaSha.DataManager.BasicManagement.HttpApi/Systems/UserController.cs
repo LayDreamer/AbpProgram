@@ -1,5 +1,6 @@
 using System.Net;
 using Volo.Abp.Account;
+using Volo.Abp.Users;
 
 namespace YaSha.DataManager.BasicManagement.Systems
 {
@@ -7,10 +8,12 @@ namespace YaSha.DataManager.BasicManagement.Systems
     public class UserController : BasicManagementController, IUserAppService
     {
         private readonly IUserAppService _userAppService;
+        private readonly ICurrentUser _iCurrentUser;
 
-        public UserController(IUserAppService userAppService)
+        public UserController(IUserAppService userAppService, ICurrentUser ICurrentUser)
         {
             _userAppService = userAppService;
+            _iCurrentUser = ICurrentUser;
         }
 
         [HttpPost("page")]
@@ -68,6 +71,13 @@ namespace YaSha.DataManager.BasicManagement.Systems
         public Task LockAsync(LockUserInput input)
         {
             return _userAppService.LockAsync(input);
+        }
+
+        [HttpPost("currentUser")]
+        [SwaggerOperation(summary: "获取当前用户", Tags = new[] { "Users" })]
+        public string currentUser()
+        {
+            return _iCurrentUser.UserName;
         }
     }
 }

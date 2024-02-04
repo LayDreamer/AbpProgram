@@ -1,4 +1,5 @@
 using EasyAbp.PrivateMessaging.Web;
+using YaSha.DataManager.Models;
 
 namespace YaSha.DataManager
 {
@@ -41,8 +42,16 @@ namespace YaSha.DataManager
             ConfigurationSignalR(context);
             ConfigurationMultiTenancy();
             ConfigureJsonCycle(context.Services);
+            ConfigAPSServic(context.Services);
         }
 
+        private void ConfigAPSServic(IServiceCollection services)
+        {
+            var clientID = "H8TGCJ5FbzwJNXpiZgSxQ3op54XZvKoA";
+            var clientSecret = "GuISW3SrdG9RTdtl";
+            string bucket = null; // Optional
+            services.AddSingleton(new APS(clientID, clientSecret, bucket));
+        }
 
         /// <summary>
         /// 处理json嵌套模型转换
@@ -222,7 +231,15 @@ namespace YaSha.DataManager
         /// </summary>
         private void ConfigureIdentity(ServiceConfigurationContext context)
         {
-            context.Services.Configure<IdentityOptions>(options => { options.Lockout = new LockoutOptions() { AllowedForNewUsers = false }; });
+            context.Services.Configure<IdentityOptions>(options =>
+            {
+                options.Lockout = new LockoutOptions()
+                {
+                    AllowedForNewUsers = true,
+                    DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5),
+                    MaxFailedAccessAttempts = 5,
+                };
+            });
         }
 
         private void ConfigurationSignalR(ServiceConfigurationContext context)

@@ -33,7 +33,12 @@ public class ProductInventModule : FullAuditedAggregateRoot<Guid>
     public string LimitInfos { get; set; }
 
     public List<ProductInventMaterial> Materials { get; set; }
-
+    
+    public ProductInventModule(Guid id) : base(id)
+    {
+        Materials = new List<ProductInventMaterial>();
+    }
+    
     public ProductInventModule()
     {
         Materials = new List<ProductInventMaterial>();

@@ -1,13 +1,12 @@
 ﻿using YaSha.DataManager.ProductInventory;
-using YaSha.DataManager.ProductInventory.AggregateRoot;
-using YaSha.DataManager.ProductInventory.Dto;
 
 namespace YaSha.DataManager.ProductRetrieval.Dto;
 
 public class ProductRetrievalResultDto
 {
-    public ProductRetrievalResultDto(string productName, string productCode, string moduleName, string moduleCode, string materialName, string materialCode)
+    public ProductRetrievalResultDto( string productName, string productCode, string moduleName, string moduleCode, string materialName, string materialCode)
     {
+        Id = productCode + "-" + moduleCode + "-" + materialCode;
         ProductName = productName;
         ProductCode = productCode;
         ModuleName = moduleName;
@@ -18,20 +17,25 @@ public class ProductRetrievalResultDto
 
     public ProductRetrievalResultDto()
     {
-        
+
     }
-    
+
+    public string Id { get; set; }
+
+    public string MaterialCount { get; set; }
+    public string MaterialMoney { get; set; }
+
     public ProductInventroyTag Tag { get; set; }
 
-    public string ProductName { get; private set; }
-    
-    public string ProductCode { get; private set; }
-    
-    public string ModuleName { get; private set; }
-    
-    public string ModuleCode { get; private set; }
-    
-    public string MaterialName { get; private set; }
-    
-    public string MaterialCode { get; private set; }
+    public string ProductName { get; set; }
+
+    public string ProductCode { get; set; }
+
+    public string ModuleName { get; set; }
+
+    public string ModuleCode { get; set; }
+
+    public string MaterialName { get; set; }
+
+    public string MaterialCode { get; set; }
 }

@@ -1,11 +1,20 @@
+using YaSha.DataManager.ArchitectureList.AggregateRoot;
 using YaSha.DataManager.DataDictionaryManagement.DataDictionaries.Aggregates;
+using YaSha.DataManager.Domain;
 using YaSha.DataManager.FamilyLibs;
-using YaSha.DataManager.FamilyTrees;
 using YaSha.DataManager.LanguageManagement.EntityFrameworkCore;
 using YaSha.DataManager.LanguageManagement.Languages.Aggregates;
 using YaSha.DataManager.LanguageManagement.LanguageTexts.Aggregates;
+using YaSha.DataManager.MaterialManage.AggregateRoot;
+using YaSha.DataManager.MeasuringExcels;
+using YaSha.DataManager.NewFamilyLibrary;
 using YaSha.DataManager.NotificationManagement.Notifications.Aggregates;
+using YaSha.DataManager.ProcessingLists;
 using YaSha.DataManager.ProductInventory.AggregateRoot;
+using YaSha.DataManager.ProductRetrieval;
+using YaSha.DataManager.ProductRetrieval.AggregateRoot;
+using YaSha.DataManager.SaleOderList;
+using YaSha.DataManager.StandardAndPolicy.AggregateRoot;
 
 namespace YaSha.DataManager.EntityFrameworkCore
 {
@@ -25,6 +34,7 @@ namespace YaSha.DataManager.EntityFrameworkCore
         IDataDictionaryManagementDbContext,
         ILanguageManagementDbContext
     {
+        public DbSet<DomainUser> DomainUsers { get; set; }
         public DbSet<IdentityUser> Users { get; set; }
         public DbSet<IdentityRole> Roles { get; set; }
         public DbSet<IdentityClaimType> ClaimTypes { get; set; }
@@ -49,10 +59,29 @@ namespace YaSha.DataManager.EntityFrameworkCore
         public DbSet<LanguageText> LanguageTexts { get; set; }
         public DbSet<FamilyTree> Trees { get; set; }
         public DbSet<FamilyLib> FamilyLibs { get; set; }
+        public DbSet<MaterialInventory> MaterialInventoryInfo { get; set; }
+        public DbSet<ProjectInfo> ProjectInfos{ get; set; }
         public DbSet<ProductInventTree> ProductInventTrees { get; set; }
         public DbSet<ProductInventProduct> ProductInventProducts { get; set; }
         public DbSet<ProductInventModule> ProductInventModules { get; set; }
         public DbSet<ProductInventMaterial> ProductInventMaterials { get; set; }
+        public DbSet<StandardAndPolicyTree> StandardAndPolicyTrees { get; set; }
+        public DbSet<StandardAndPolicyLib> StandardAndPolicyLibs { get; set; }
+        public DbSet<StandardAndPolicyTheme> StandardAndPolicyThemes { get; set; }
+        public DbSet<StandardAndPolicyCollect> StandardAndPolicyCollects { get; set; }
+        public DbSet<ListProcessing.ListProcessing> ListProcessings { get; set; }
+        public DbSet<ProcessingList> ProcessingLists { get; set; }
+        public DbSet<ProcessingData> ProcessingDatas { get; set; }
+        public DbSet<ArchitectureListTree> ArchitectureListTrees { get; set; }
+        public DbSet<ArchitectureListModule> ArchitectureListModules { get; set; }
+        public DbSet<ArchitectureListMaterial> ArchitectureListMaterials { get; set; }
+        public DbSet<ArchitectureListFile> ArchitectureListFiles { get; set; }
+        public DbSet<ArchitectureListModuleFile> ArchitectureListModuleFiles { get; set; }
+        public DbSet<MaterialManageInfo> MaterialManageInfos { get; set; }
+        public DbSet<MeasuringExcel> MeasuringExcels { get; set; }
+        public DbSet<SaleOder> SaleOderList { get; set; }
+        public DbSet<NewFamilyTree> NewFamilyTrees { get; set; }
+        public DbSet<NewFamilyLib> NewFamilyLibs { get; set; }
 
         public DataManagerDbContext(DbContextOptions<DataManagerDbContext> options)
             : base(options)
@@ -86,6 +115,8 @@ namespace YaSha.DataManager.EntityFrameworkCore
 
             // 多语言
             builder.ConfigureLanguageManagement();
+
+          
         }
 
     }

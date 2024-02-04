@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
@@ -6,6 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="LdapForNet" Version="2.7.15" />
     <PackageReference Include="Volo.Abp.AutoMapper" />
     <PackageReference Include="Volo.Abp.Ddd.Application" />
     <PackageReference Include="Volo.Abp.Account.Application" />
@@ -19,7 +20,7 @@
     <PackageReference Include="Microsoft.IdentityModel.Tokens" />
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" />
     <PackageReference Include="IdentityModel" />
-    <PackageReference Include="Magicodes.IE.Excel.AspNetCore" />
+    <ProjectReference Include="..\..\..\..\services\src\YaSha.DataManager.Domain\YaSha.DataManager.Domain.csproj" />
     <ProjectReference Include="..\YaSha.DataManager.BasicManagement.Application.Contracts\YaSha.DataManager.BasicManagement.Application.Contracts.csproj" />
     <ProjectReference Include="..\YaSha.DataManager.BasicManagement.Domain\YaSha.DataManager.BasicManagement.Domain.csproj" />
   </ItemGroup>

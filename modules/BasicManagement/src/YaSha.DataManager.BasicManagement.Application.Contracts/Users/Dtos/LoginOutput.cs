@@ -10,6 +10,8 @@ namespace YaSha.DataManager.BasicManagement.Users.Dtos
 
         public string Token { get; set; }
 
+        public string ErrorMsg { get; set; }
+
         public List<string> Roles { get; set; } = new List<string>();
     }
 }

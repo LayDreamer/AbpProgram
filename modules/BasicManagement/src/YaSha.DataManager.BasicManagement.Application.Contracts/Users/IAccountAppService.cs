@@ -8,5 +8,11 @@ namespace YaSha.DataManager.BasicManagement.Users
         /// 用户名密码登录
         /// </summary>
         Task<LoginOutput> LoginAsync(LoginInput input);
+
+        /// <summary>
+        /// 域用户登录
+        /// </summary>
+        Task<LoginOutput> DomainLoginAsync(LoginInput input);
+
     }
 }

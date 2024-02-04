@@ -34,7 +34,7 @@ public class ProductInventoryProductDto  : AuditedEntityDto<Guid>
     
     public string CreateUser { get; set; }
     
-    public string ModifyUser { get; set; }
+    public string ModifiyUser { get; set; }
     
     public string System { get; set; }
     
@@ -45,6 +45,8 @@ public class ProductInventoryProductDto  : AuditedEntityDto<Guid>
     public string ProjectName { get; set; }
     
     public string LimitInfos { get; set; }
+    
+    public string ImagePath { get; set; }
     
     public ProductInventoryPublishStatus Status { get; set; }
     public List<ProductInventoryModuleDto> Modules { get; set; }

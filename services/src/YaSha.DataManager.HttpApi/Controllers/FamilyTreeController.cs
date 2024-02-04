@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using Volo.Abp.Application.Dtos;
-using Volo.Abp.DependencyInjection;
+using Volo.Abp.Application.Services;
+using YaSha.DataManager.FamilyLibs;
 using YaSha.DataManager.FamilyTrees;
 
 namespace YaSha.DataManager.Controllers
@@ -20,8 +17,8 @@ namespace YaSha.DataManager.Controllers
             _service = service;
         }
 
-        [HttpPost("Creat")]
-        public async Task<FamilyTreeDto> CreateAsync(FamilyTreeDto input)
+        [HttpPost("Create")]
+        public async Task<FamilyTreeDto> CreateAsync(FamilyTreeCreateDto input)
         {
             return await _service.CreateAsync(input);
         }
@@ -45,16 +42,38 @@ namespace YaSha.DataManager.Controllers
         }
 
         [HttpPost("Update")]
-        public async Task<FamilyTreeDto> UpdateAsync(Guid id, FamilyTreeDto input)
+        public async Task<FamilyTreeDto> UpdateAsync(Guid id, FamilyTreeCreateDto input)
         {
             return await _service.UpdateAsync(id, input);
         }
 
         [HttpPost("Get")]
-        public async Task<PagedResultDto<FamilyTreeDto>> GetTreeListAsync()
+        public async Task<List<FamilyTreeDto>> GetTreeListAsync()
         {
             return await _service.GetTreeListAsync();
         }
+
+        [HttpPost("GetChildrenById")]
+        public async Task<List<Guid>> GetCategoryTreeChildrenGuids(Guid id)
+        {
+            return await _service.GetCategoryTreeChildrenGuids(id);
+        }
+
+      
+
+        [HttpPost("CreateList")]
+        public async Task<List< FamilyTreeDto>> CreateListAsync( List< FamilyTreeCreateDto> dtos)
+        {
+            return await _service.CreateListAsync(dtos);
+        }
+
+        [HttpPost("DeleteList")]
+        public async Task DeleteListAsync(List<FamilyTreeDto> dtos)
+        {
+            await _service.DeleteListAsync(dtos);
+        }
+
+
 
 
     }

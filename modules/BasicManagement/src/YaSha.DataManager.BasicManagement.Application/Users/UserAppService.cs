@@ -1,6 +1,6 @@
 using YaSha.DataManager.BasicManagement.Users.Dtos;
-using Magicodes.ExporterAndImporter.Excel;
-using Magicodes.ExporterAndImporter.Excel.AspNetCore;
+//using Magicodes.ExporterAndImporter.Excel;
+//using Magicodes.ExporterAndImporter.Excel.AspNetCore;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Volo.Abp.Account;
@@ -15,20 +15,20 @@ namespace YaSha.DataManager.BasicManagement.Users
         private readonly IIdentityUserAppService _identityUserAppService;
         private readonly IdentityUserManager _userManager;
         private readonly IIdentityUserRepository _identityUserRepository;
-        private readonly IExcelExporter _excelExporter;
+        //private readonly IExcelExporter _excelExporter;
         private readonly IOptions<IdentityOptions> _options;
 
         public UserAppService(
             IIdentityUserAppService identityUserAppService,
             IdentityUserManager userManager,
             IIdentityUserRepository userRepository,
-            IExcelExporter excelExporter,
+            //IExcelExporter excelExporter,
             IOptions<IdentityOptions> options)
         {
             _identityUserAppService = identityUserAppService;
             _userManager = userManager;
             _identityUserRepository = userRepository;
-            _excelExporter = excelExporter;
+            //_excelExporter = excelExporter;
             _options = options;
         }
 
@@ -59,18 +59,19 @@ namespace YaSha.DataManager.BasicManagement.Users
         [Authorize(BasicManagementPermissions.SystemManagement.UserExport)]
         public async Task<ActionResult> ExportAsync(PagingUserListInput input)
         {
-            var request = new GetIdentityUsersInput
-            {
-                Filter = input.Filter?.Trim(),
-                MaxResultCount = input.PageSize,
-                SkipCount = input.SkipCount,
-                Sorting = " LastModificationTime desc"
-            };
-            var source = await _identityUserRepository
-                .GetListAsync(request.Sorting, request.MaxResultCount, request.SkipCount, request.Filter);
-            var result = ObjectMapper.Map<List<Volo.Abp.Identity.IdentityUser>, List<ExportIdentityUserOutput>>(source);
-            var bytes = await _excelExporter.ExportAsByteArray<ExportIdentityUserOutput>(result);
-            return new XlsxFileResult(bytes: bytes, fileDownloadName: $"用户导出列表{Clock.Now:yyyyMMdd}");
+            return null;
+            //var request = new GetIdentityUsersInput
+            //{
+            //    Filter = input.Filter?.Trim(),
+            //    MaxResultCount = input.PageSize,
+            //    SkipCount = input.SkipCount,
+            //    Sorting = " LastModificationTime desc"
+            //};
+            //var source = await _identityUserRepository
+            //    .GetListAsync(request.Sorting, request.MaxResultCount, request.SkipCount, request.Filter);
+            //var result = ObjectMapper.Map<List<Volo.Abp.Identity.IdentityUser>, List<ExportIdentityUserOutput>>(source);
+            //var bytes = await _excelExporter.ExportAsByteArray<ExportIdentityUserOutput>(result);
+            //return new XlsxFileResult(bytes: bytes, fileDownloadName: $"用户导出列表{Clock.Now:yyyyMMdd}");
         }
 
         /// <summary>

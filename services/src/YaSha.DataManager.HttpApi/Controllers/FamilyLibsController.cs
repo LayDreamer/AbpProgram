@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using Volo.Abp.Application.Dtos;
-using YaSha.DataManager.Common;
 using YaSha.DataManager.FamilyLibs;
 using YaSha.DataManager.FamilyTrees;
+using YaSha.DataManager.ProductInventory.Dto;
 
 namespace YaSha.DataManager.Controllers
 {
@@ -21,7 +17,7 @@ namespace YaSha.DataManager.Controllers
         }
 
         [HttpPost("Creat")]
-        public async Task<FamilyLibDto> CreateAsync(FamilyLibDto input)
+        public async Task<FamilyLibDto> CreateAsync(FamilyLibCreateDto input)
         {
             return await _service.CreateAsync(input);
         }
@@ -45,7 +41,7 @@ namespace YaSha.DataManager.Controllers
         }
 
         [HttpPost("Update")]
-        public async Task<FamilyLibDto> UpdateAsync(Guid id, FamilyLibDto input)
+        public async Task<FamilyLibDto> UpdateAsync(Guid id, FamilyLibCreateDto input)
         {
             return await _service.UpdateAsync(id, input);
         }
@@ -60,6 +56,31 @@ namespace YaSha.DataManager.Controllers
         public async Task<List<FamilyLibDto>> GetFamilyModuleList(Guid guid)
         {
             return await _service.GetFamilyModuleList(guid);
+        }
+
+        [HttpPost("UploadFamilyLibImage")]
+        public async Task<ImageResponseDto> UploadFamilyLibImage([FromForm] ImageFileDto dto)
+        {
+            return await _service.UploadFamilyLibImage(dto);
+        }
+
+        [HttpPost("Get")]
+        public async Task<List<FamilyLibDto>> GetLibsAsync()
+        {
+            return await _service.GetLibsAsync();
+        }
+
+
+        [HttpPost("CreateList")]
+        public async Task CreateListAsync(List<FamilyLibCreateDto> dtos)
+        {
+            await _service.CreateListAsync(dtos);
+        }
+
+        [HttpPost("DeleteList")]
+        public async Task DeleteListAsync(List<FamilyLibDto> dtos)
+        {
+            await _service.DeleteListAsync(dtos);
         }
     }
 }

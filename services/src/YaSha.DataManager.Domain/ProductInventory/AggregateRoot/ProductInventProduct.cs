@@ -49,10 +49,18 @@ public class ProductInventProduct : FullAuditedAggregateRoot<Guid>
 
     public string LimitInfos { get; set; }
     
+    public string ImagePath { get; set; }
+    
     public ProductInventoryPublishStatus Status { get; set; }
     public List<ProductInventModule> Modules { get; set; }
     public List<ProductInventMaterial> Materials { get; set; }
 
+    public ProductInventProduct(Guid id) : base(id)
+    {
+        Modules = new List<ProductInventModule>();
+        Materials = new List<ProductInventMaterial>();
+    }
+    
     public ProductInventProduct()
     {
         Modules = new List<ProductInventModule>();

@@ -6,6 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
     <PackageReference Include="Volo.Abp.AspNetCore.Mvc" />
     <PackageReference Include="Swashbuckle.AspNetCore.Annotations" />
     <ProjectReference Include="..\YaSha.DataManager.BasicManagement.Application.Contracts\YaSha.DataManager.BasicManagement.Application.Contracts.csproj" />

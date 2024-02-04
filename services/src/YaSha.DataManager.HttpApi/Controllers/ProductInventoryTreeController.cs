@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Volo.Abp.Application.Dtos;
-using YaSha.DataManager.FamilyLibs;
-using YaSha.DataManager.ProductInventory;
+﻿using YaSha.DataManager.ProductInventory;
 using YaSha.DataManager.ProductInventory.Dto;
 
 namespace YaSha.DataManager.Controllers
 {
+    /// <summary>
+    /// 架构清单树
+    /// </summary>
     [Route("ProductInventoryTree")]
     public class ProductInventoryTreeController : DataManagerController, IProductIventTreeAppService
     {

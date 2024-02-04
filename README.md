@@ -1,2 +1,0 @@
-# AbpProgram
-AbpProExercise
